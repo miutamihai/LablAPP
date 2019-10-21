@@ -21,27 +21,30 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('Compare that price.\nWelcome!'),
         ),
-        body: Column(
-          children: [
-            RaisedButton(
-              child: Text(buttonsText[0]),
-              onPressed: () => logButtonPress(buttonsText[0]),
-            ),
-            RaisedButton(
-              child: Text(buttonsText[1]),
-              onPressed: () => logButtonPress(buttonsText[1]),
-            ),
-            RaisedButton(
-              child: Text(buttonsText[2]),
-              onPressed: () => logButtonPress(buttonsText[2]),
-            ),
-            // for (var i = 0; i < buttonsText.length; i++) {
-            //   RaisedButton(
-            //   child: Text(buttonsText[i]),
-            //   onPressed: () => logButtonPress(buttonsText[i]),
-            // ),
-            // }
-          ],
+        body: Center (
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              RaisedButton(
+                child: Text(buttonsText[0]),
+                onPressed: () => logButtonPress(buttonsText[0]),
+              ),
+              RaisedButton(
+                child: Text(buttonsText[1]),
+                onPressed: () => logButtonPress(buttonsText[1]),
+              ),
+              RaisedButton(
+                child: Text(buttonsText[2]),
+                onPressed: () => logButtonPress(buttonsText[2]),
+              ),
+              // for (var i = 0; i < buttonsText.length; i++) {
+              //   RaisedButton(
+              //   child: Text(buttonsText[i]),
+              //   onPressed: () => logButtonPress(buttonsText[i]),
+              // ),
+              // }
+            ],
+          ),
         ),
       ),
     );
