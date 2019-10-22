@@ -19,9 +19,17 @@
 ---
 ## Mobile application for price comparison - flutter framework.
 
-## Getting Started
+1. The project involves the creation of a multi-platform (Android and iOS) application that allows users to check the average price of products in a given country.
+  - Later, the implementation of the function of reviewing opinions of other users about products and the possibility of adding opinions by registered users is expected.
 
-This project is a starting point for a Flutter application.
+2. The main users of the program are tourists as well as people temporarily staying in another country, e.g. students.
+
+3. Currently, application testing will focus on the Android version.
+
+4. [Link to ours Trello Board](https://trello.com/b/UdiiXOaY/member-assignments)
+
+---
+## Getting Started with flutter:
 
 A few resources to get you started if this is your first Flutter project:
 
