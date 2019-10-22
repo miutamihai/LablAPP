@@ -1,6 +1,23 @@
-# compare_that_price
+# "Compare that price" - college third-year project.
+---
+## Authors:
+- **Adam Ochotnicki**
+  - student number: **S00182098**
+  - email: **adam.ochotnicki@mail.itsligo.ie**
 
-A new Flutter project.
+- **Giles Forde**
+  - student number: **S00083446**
+  - email: **giles.forde@mail.itsligo.ie**
+
+- **Luis Panadero Cerda**
+  - student number: **S00201348**
+  - email: **luis.panaderocerda@mail.itsligo.ie**
+
+- **Mihai Miuta**
+  - student number: **S00201405**
+  - email: **mihai.miuta@mail.itsligo.ie**
+---
+## Mobile application for price comparison - flutter framework.
 
 ## Getting Started
 
