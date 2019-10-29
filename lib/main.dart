@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
+import './mainButton.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
 
   void logButtonPress(String label) {
-    print('Button: "' + label + '" was pressed!');
+    print('Button: $label was pressed!');
   }
 
   @override
@@ -21,28 +22,13 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('Compare that price.\nWelcome!'),
         ),
-        body: Center (
+        body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              RaisedButton(
-                child: Text(buttonsText[0]),
-                onPressed: () => logButtonPress(buttonsText[0]),
-              ),
-              RaisedButton(
-                child: Text(buttonsText[1]),
-                onPressed: () => logButtonPress(buttonsText[1]),
-              ),
-              RaisedButton(
-                child: Text(buttonsText[2]),
-                onPressed: () => logButtonPress(buttonsText[2]),
-              ),
-              // for (var i = 0; i < buttonsText.length; i++) {
-              //   RaisedButton(
-              //   child: Text(buttonsText[i]),
-              //   onPressed: () => logButtonPress(buttonsText[i]),
-              // ),
-              // }
+              MainButton(buttonsText[0], logButtonPress),
+              MainButton(buttonsText[1], logButtonPress),
+              MainButton(buttonsText[2], logButtonPress),
             ],
           ),
         ),
