@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class MainButton extends StatelessWidget {
-  final String text;
+  final int index;
+  final List<String> buttonsText;
   final Function selectHandler;
 
-  MainButton(this.text, this.selectHandler);
+  MainButton(this.index, this.buttonsText, this.selectHandler);
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +14,8 @@ class MainButton extends StatelessWidget {
       child: RaisedButton(
           color: Colors.blue,
           textColor: Colors.white,
-          child: Text(text),
-          onPressed: () => selectHandler(text),
+          child: Text(buttonsText[index]),
+          onPressed: () => selectHandler(index, buttonsText),
         ),
     );
   }
