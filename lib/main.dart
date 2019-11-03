@@ -1,24 +1,10 @@
 import 'package:flutter/material.dart';
 
-
+import './widgets/takePicture.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // var _buttonsText = [
-  //   'Take a Picture',
-  //   'Log In',
-  //   'Sign Up',
-  // ];
-  //int _selectedButtonIndex;
-
-  // void _buttonPressed(int index, List<String> buttons) {
-  //   setState(() {
-  //    _selectedButtonIndex = index;
-  //   });
-  //   print('Button: "' + buttons[index] + '" was pressed!');
-  // }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,21 +14,6 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.amber,
       ),
       home: MyHomePage(),
-      // home: Scaffold(
-      //   appBar: AppBar(
-      //     title: Text('Compare that price.\nWelcome!'),
-      //   ),
-      //   body: Center(
-      //     child: Column(
-      //       mainAxisAlignment: MainAxisAlignment.center,
-      //       children: [
-      //         MainButton(0, _buttonsText, _buttonPressed),
-      //         MainButton(1, _buttonsText, _buttonPressed),
-      //         MainButton(2, _buttonsText, _buttonPressed),
-      //       ],
-      //     ),
-      //   ),
-      // ),
     );
   }
 }
@@ -62,24 +33,42 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Text('placeholder'),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                icon: Icon(Icons.photo_library),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: Icon(Icons.camera),
-                onPressed: () {},
-              ),
-              FlatButton(
-                child: Text('Log In'),
-                onPressed: () {},
-              ),
-            ],
-          )
+          Text('camera'),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //   children: [
+          //     IconButton(
+          //       icon: Icon(Icons.photo_library),
+          //       onPressed: () {},
+          //     ),
+          //     IconButton(
+          //       icon: Icon(Icons.camera),
+          //       onPressed: () {},
+          //     ),
+          //     FlatButton(
+          //       child: Text('Log In'),
+          //       onPressed: () {},
+          //     ),
+          //   ],
+          // ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Theme.of(context).accentColor,
+        currentIndex: 1,
+        items: [
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.photo_library),
+            title: new Text('Gallery'),
+          ),
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.camera),
+            title: new Text('Take a Picture'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            title: Text('Log In'),
+          ),
         ],
       ),
     );
