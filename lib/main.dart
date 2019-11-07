@@ -24,6 +24,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int index = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,11 +57,16 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).accentColor,
-        currentIndex: 1,
+        onTap: (int index) {
+          setState(() {
+            this.index = index;
+          });},
+        currentIndex: index,
         items: [
           BottomNavigationBarItem(
             icon: new Icon(Icons.photo_library),
             title: new Text('Gallery'),
+            //activeIcon: 
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.camera),
