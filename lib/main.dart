@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './widgets/takePicture.dart';
+import './widgets/imageInput.dart';
 
 void main() => runApp(MyApp());
 
@@ -36,23 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Text('camera'),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //   children: [
-          //     IconButton(
-          //       icon: Icon(Icons.photo_library),
-          //       onPressed: () {},
-          //     ),
-          //     IconButton(
-          //       icon: Icon(Icons.camera),
-          //       onPressed: () {},
-          //     ),
-          //     FlatButton(
-          //       child: Text('Log In'),
-          //       onPressed: () {},
-          //     ),
-          //   ],
-          // ),
+          RaisedButton(color: Theme.of(context).primaryColor, onPressed: () {},)
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -70,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.camera),
-            title: new Text('Take a Picture'),
+            title: new Text('Camera'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
