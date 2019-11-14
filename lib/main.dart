@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import './widgets/logIn.dart';
 //import './widgets/imageInput.dart';
 
 void main() => runApp(MyApp());
@@ -24,7 +25,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int index = 0;
+  int index = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -39,31 +40,36 @@ class _MyHomePageState extends State<MyHomePage> {
       //     RaisedButton(color: Theme.of(context).primaryColor, onPressed: () {},)
       //   ],
       // ),
-      body: GridView.count(
-        crossAxisCount: 2,
-        //children: <Widget>[ListView.builder(itemBuilder: (ctx, index),)],
-        children: List.generate(20, (index) {
-          return Center(
-            child: Container(
-              child: Column(
-                children: [
-                  Text(
-                    'Item ' + (index + 1).toString(),
-                    style: Theme.of(context).textTheme.headline,
-                  ),
-                  Container(
-                    height: 100,
-                    child: Image.asset(
-                      'assets/images/emoticon-heart-4mp-free.png',
-                      fit: BoxFit.cover,
+      body: index == 0
+          ? GridView.count(
+              crossAxisCount: 2,
+              //children: <Widget>[ListView.builder(itemBuilder: (ctx, index),)],
+              children: List.generate(
+                20,
+                (index) {
+                  return Center(
+                    child: Container(
+                      child: Column(
+                        children: [
+                          Text(
+                            'Item ' + (index + 1).toString(),
+                            style: Theme.of(context).textTheme.headline,
+                          ),
+                          Container(
+                            height: 100,
+                            child: Image.asset(
+                              'assets/images/emoticon-heart-4mp-free.png',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  );
+                },
               ),
-            ),
-          );
-        }),
-      ),
+            )
+          : LogIn(),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).accentColor,
         onTap: (int index) {
