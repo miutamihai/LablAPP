@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './widgets/imageInput.dart';
+//import './widgets/imageInput.dart';
 
 void main() => runApp(MyApp());
 
@@ -32,25 +32,51 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text('Compare that Price'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Text('camera'),
-          RaisedButton(color: Theme.of(context).primaryColor, onPressed: () {},)
-        ],
+      // body: Column(
+      //   mainAxisAlignment: MainAxisAlignment.end,
+      //   children: [
+      //     Text('camera'),
+      //     RaisedButton(color: Theme.of(context).primaryColor, onPressed: () {},)
+      //   ],
+      // ),
+      body: GridView.count(
+        crossAxisCount: 2,
+        //children: <Widget>[ListView.builder(itemBuilder: (ctx, index),)],
+        children: List.generate(20, (index) {
+          return Center(
+            child: Container(
+              child: Column(
+                children: [
+                  Text(
+                    'Item ' + (index + 1).toString(),
+                    style: Theme.of(context).textTheme.headline,
+                  ),
+                  Container(
+                    height: 100,
+                    child: Image.asset(
+                      'assets/images/emoticon-heart-4mp-free.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }),
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).accentColor,
         onTap: (int index) {
           setState(() {
             this.index = index;
-          });},
+          });
+        },
         currentIndex: index,
         items: [
           BottomNavigationBarItem(
             icon: new Icon(Icons.photo_library),
             title: new Text('Gallery'),
-            //activeIcon: 
+            //activeIcon:
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.camera),
