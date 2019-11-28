@@ -84,10 +84,10 @@ class _MyHomePageState extends State<MyHomePage> {
             title: new Text('Gallery'),
             //activeIcon:
           ),
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.camera),
-            title: new Text('Camera'),
-          ),
+          // BottomNavigationBarItem(
+          //   icon: new Icon(Icons.camera),
+          //   title: new Text('Camera'),
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             title: Text('Log In'),
