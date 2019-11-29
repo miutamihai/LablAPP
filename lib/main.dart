@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './widgets/logIn.dart';
+import './widgets/createAccount.dart';
 //import './widgets/imageInput.dart';
 
 void main() => runApp(MyApp());
@@ -25,7 +26,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int index = 0;
+  int _index = 0;
+  bool _logInPage = true;
+
+  void _SetLogInOrCreatePage(bool isLogIn) {
+    setState(() {
+      this._logInPage = isLogIn;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
       //     RaisedButton(color: Theme.of(context).primaryColor, onPressed: () {},)
       //   ],
       // ),
-      body: index == 0
+      body: _index == 0
           ? GridView.count(
               crossAxisCount: 2,
               //children: <Widget>[ListView.builder(itemBuilder: (ctx, index),)],
@@ -69,15 +77,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
             )
-          : LogIn(),
+          : _logInPage ? LogIn(_SetLogInOrCreatePage) : CreateAccount(_SetLogInOrCreatePage),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).accentColor,
         onTap: (int index) {
           setState(() {
-            this.index = index;
+            this._index = index;
           });
         },
-        currentIndex: index,
+        currentIndex: _index,
         items: [
           BottomNavigationBarItem(
             icon: new Icon(Icons.photo_library),

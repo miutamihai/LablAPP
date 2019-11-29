@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class LogIn extends StatefulWidget {
+class CreateAccount extends StatefulWidget {
   final Function logIn;
 
-  LogIn(this.logIn);
+  CreateAccount(this.logIn);
 
   @override
-  _LogInState createState() => _LogInState();
+  _CreateAccountState createState() => _CreateAccountState();
 }
 
-class _LogInState extends State<LogIn> {
+class _CreateAccountState extends State<CreateAccount> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -43,8 +43,13 @@ class _LogInState extends State<LogIn> {
                 controller: passwordController,
                 onSubmitted: (_) => submitData(),
               ),
+              TextField(
+                decoration: InputDecoration(labelText: 'Confirm password'),
+                controller: passwordController,
+                onSubmitted: (_) => submitData(),
+              ),
               RaisedButton(
-                child: Text('Log in'),
+                child: Text('Create an account'),
                 textColor: Theme.of(context).primaryColor,
                 onPressed: submitData,
               ),
@@ -54,11 +59,11 @@ class _LogInState extends State<LogIn> {
               Center(
                 child: Column(
                   children: [
-                    Text('Not yet registered?'),
+                    Text('Already have an account?'),
                     RaisedButton(
-                      child: Text('Create an account'),
+                      child: Text('Log in'),
                       textColor: Theme.of(context).primaryColor,
-                      onPressed: () => widget.logIn(false),
+                      onPressed: () => widget.logIn(true),
                     ),
                   ],
                 ),
