@@ -58,7 +58,7 @@ class _LogInState extends State<LogIn> {
                     RaisedButton(
                       child: Text('Create an account'),
                       textColor: Theme.of(context).primaryColor,
-                      onPressed: () => widget.logIn(false),
+                      onPressed: () => widget.logIn(false), // go to createAccount page
                     ),
                   ],
                 ),

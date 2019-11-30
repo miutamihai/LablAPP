@@ -12,12 +12,14 @@ class CreateAccount extends StatefulWidget {
 class _CreateAccountState extends State<CreateAccount> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmationController = TextEditingController();
 
   void submitData() {
     final enteredEmail = emailController.text;
     final enteredPassword = passwordController.text;
+    final confirmedPassword = confirmationController.text;
 
-    if (enteredEmail.isEmpty || enteredPassword.isEmpty) {
+    if (enteredEmail.isEmpty || enteredPassword.isEmpty || confirmedPassword.isEmpty) {
       return;
     }
   }
@@ -45,7 +47,7 @@ class _CreateAccountState extends State<CreateAccount> {
               ),
               TextField(
                 decoration: InputDecoration(labelText: 'Confirm password'),
-                controller: passwordController,
+                controller: confirmationController,
                 onSubmitted: (_) => submitData(),
               ),
               RaisedButton(
@@ -63,7 +65,7 @@ class _CreateAccountState extends State<CreateAccount> {
                     RaisedButton(
                       child: Text('Log in'),
                       textColor: Theme.of(context).primaryColor,
-                      onPressed: () => widget.logIn(true),
+                      onPressed: () => widget.logIn(true), // go to logIn page
                     ),
                   ],
                 ),

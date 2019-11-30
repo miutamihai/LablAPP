@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './widgets/logIn.dart';
-import './widgets/createAccount.dart';
+import './widgets/log_in.dart';
+import './widgets/create_account.dart';
 //import './widgets/imageInput.dart';
 
 void main() => runApp(MyApp());
@@ -29,7 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _index = 0;
   bool _logInPage = true;
 
-  void _SetLogInOrCreatePage(bool isLogIn) {
+  void _setLogInOrCreatePage(bool isLogIn) {
     setState(() {
       this._logInPage = isLogIn;
     });
@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
             )
-          : _logInPage ? LogIn(_SetLogInOrCreatePage) : CreateAccount(_SetLogInOrCreatePage),
+          : _logInPage ? LogIn(_setLogInOrCreatePage) : CreateAccount(_setLogInOrCreatePage),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).accentColor,
         onTap: (int index) {
