@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import './widgets/log_in.dart';
 import './widgets/create_account.dart';
+import './widgets/gallery.dart';
 //import './widgets/imageInput.dart';
 
 void main() => runApp(MyApp());
@@ -41,48 +42,15 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text('Compare that Price'),
       ),
-      // body: Column(
-      //   mainAxisAlignment: MainAxisAlignment.end,
-      //   children: [
-      //     Text('camera'),
-      //     RaisedButton(color: Theme.of(context).primaryColor, onPressed: () {},)
-      //   ],
-      // ),
-      body: _index == 0
-          ? GridView.count(
-              crossAxisCount: 2,
-              //children: <Widget>[ListView.builder(itemBuilder: (ctx, index),)],
-              children: List.generate(
-                20,
-                (index) {
-                  return Center(
-                    child: Container(
-                      child: Column(
-                        children: [
-                          Text(
-                            'Item ' + (index + 1).toString(),
-                            style: Theme.of(context).textTheme.headline,
-                          ),
-                          Container(
-                            height: 100,
-                            child: Image.asset(
-                              'assets/images/emoticon-heart-4mp-free.png',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-            )
+      body: _index < 2
+          ? _index == 0 ? Gallery() : Text('camera')
           : _logInPage ? LogIn(_setLogInOrCreatePage) : CreateAccount(_setLogInOrCreatePage),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).accentColor,
         onTap: (int index) {
           setState(() {
             this._index = index;
+            this._logInPage = true; // set logIn button to login page
           });
         },
         currentIndex: _index,
@@ -90,12 +58,11 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
             icon: new Icon(Icons.photo_library),
             title: new Text('Gallery'),
-            //activeIcon:
           ),
-          // BottomNavigationBarItem(
-          //   icon: new Icon(Icons.camera),
-          //   title: new Text('Camera'),
-          // ),
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.camera),
+            title: new Text('Camera'),
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             title: Text('Log In'),
