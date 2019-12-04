@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import './widgets/log_in.dart';
 import './widgets/create_account.dart';
 import './widgets/gallery.dart';
+import './widgets/camera_page.dart';
 //import './widgets/imageInput.dart';
 
 void main() => runApp(MyApp());
@@ -13,8 +14,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Compare that Price',
       theme: ThemeData(
-        primarySwatch: Colors.green,
-        accentColor: Colors.amber,
+        primarySwatch: Colors.purple,
+        accentColor: Colors.white,
       ),
       home: MyHomePage(),
     );
@@ -27,7 +28,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _index = 0;
+  int _index = 1;
   bool _logInPage = true;
 
   void _setLogInOrCreatePage(bool isLogIn) {
@@ -40,10 +41,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Compare that Price'),
+        title: Text('Compare that Price')
       ),
       body: _index < 2
-          ? _index == 0 ? Gallery() : Text('camera')
+          ? _index == 0 ? Gallery() : CameraPage()
           : _logInPage ? LogIn(_setLogInOrCreatePage) : CreateAccount(_setLogInOrCreatePage),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).accentColor,
