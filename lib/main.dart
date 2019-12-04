@@ -4,6 +4,7 @@ import './widgets/log_in.dart';
 import './widgets/create_account.dart';
 import './widgets/gallery.dart';
 import './widgets/camera_page.dart';
+import './widgets/products_list.dart';
 //import './widgets/imageInput.dart';
 
 void main() => runApp(MyApp());
@@ -14,8 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Compare that Price',
       theme: ThemeData(
-        primarySwatch: Colors.purple,
-        accentColor: Colors.white,
+        primarySwatch: Colors.brown,
+        accentColor: Colors.amber,
       ),
       home: MyHomePage(),
     );
