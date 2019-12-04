@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text('Compare that Price')
       ),
       body: _index < 2
-          ? _index == 0 ? Gallery() : CameraPage()
+          ? _index == 0 ? ProductsList() : CameraPage()
           : _logInPage ? LogIn(_setLogInOrCreatePage) : CreateAccount(_setLogInOrCreatePage),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).accentColor,
