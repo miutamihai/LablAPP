@@ -9,9 +9,9 @@ class Product {
 
   Product({
     @required this.name,
-    @required this.brand,
+    this.brand,
     @required this.price,
-    @required this.currency,
+    this.currency,
     @required this.size,
   });
 }
