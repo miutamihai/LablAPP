@@ -7,53 +7,45 @@ class ProductsList extends StatelessWidget {
   final List<Product> _products = [
     Product(
       name: 'Tyskie',
+      image: 'assets/images/tyskie_jsne-500ml.jpg',
       price: 2,
       size: '500 ml'
     ),
     Product(
-      name: 'Tyskie',
+      name: 'Budweiser',
+      image: 'assets/images/budweiser-can-440ml.jpg',
+      price: 2,
+      size: '440 ml'
+    ),
+    Product(
+      name: 'Corona Light',
+      image: 'assets/images/corona_light-335ml.jpg',
+      price: 2,
+      size: '335 ml'
+    ),
+    Product(
+      name: 'Heineken Original',
+      image: 'assets/images/heineken_original-330ml.jpg',
+      price: 2,
+      size: '330 ml'
+    ),
+    Product(
+      name: 'Rockshore',
+      image: 'assets/images/rockshore-can-500ml.jpg',
       price: 2,
       size: '500 ml'
     ),
     Product(
-      name: 'Tyskie',
+      name: 'Hop House 13',
+      image: 'assets/images/hop_house_13-can-500ml.jpg',
       price: 2,
       size: '500 ml'
     ),
     Product(
-      name: 'Tyskie',
+      name: 'Birra Moretti',
+      image: 'assets/images/birra_moretti-330ml1.png',
       price: 2,
-      size: '500 ml'
-    ),
-    Product(
-      name: 'Tyskie',
-      price: 2,
-      size: '500 ml'
-    ),
-    Product(
-      name: 'Tyskie',
-      price: 2,
-      size: '500 ml'
-    ),
-    Product(
-      name: 'Tyskie',
-      price: 2,
-      size: '500 ml'
-    ),
-    Product(
-      name: 'Tyskie',
-      price: 2,
-      size: '500 ml'
-    ),
-    Product(
-      name: 'Tyskie',
-      price: 2,
-      size: '500 ml'
-    ),
-    Product(
-      name: 'Tyskie',
-      price: 2,
-      size: '500 ml'
+      size: '330 ml'
     ),
   ];
 
@@ -67,14 +59,16 @@ class ProductsList extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                height: 100,
+                height: 120,
+                padding: EdgeInsets.all(10),
                 child: Image.asset(
                   'assets/images/emoticon-heart-4mp-free.png',
+                  //_products[index].image,
                   fit: BoxFit.cover,
                 ),
               ),
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
                     child: Text(
@@ -83,6 +77,7 @@ class ProductsList extends StatelessWidget {
                     ),
                   ),
                   Row(
+                    //mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         _products[index].size,

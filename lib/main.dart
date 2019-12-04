@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Compare that Price',
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.brown,
         accentColor: Colors.amber,
       ),
       home: MyHomePage(),
