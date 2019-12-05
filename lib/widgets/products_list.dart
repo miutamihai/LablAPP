@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 //import 'package:intl/intl.dart';
 
@@ -43,7 +45,7 @@ class ProductsList extends StatelessWidget {
     ),
     Product(
       name: 'Birra Moretti',
-      image: 'assets/images/birra_moretti-330ml1.png',
+      image: 'assets/images/birra_moretti-330ml.jpg',
       price: 2,
       size: '330 ml'
     ),
@@ -61,11 +63,12 @@ class ProductsList extends StatelessWidget {
               Container(
                 height: 120,
                 padding: EdgeInsets.all(10),
-                child: Image.asset(
-                  'assets/images/emoticon-heart-4mp-free.png',
-                  //_products[index].image,
-                  fit: BoxFit.cover,
-                ),
+                child: 
+                Image.asset(_products[index].image)
+                /* Image.asset(
+                  //'assets/images/emoticon-heart-4mp-free.png',
+                  _products[index].image,
+                  fit: BoxFit.cover, */
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

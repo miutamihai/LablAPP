@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Compare that Price',
+      title: 'LABL',
       theme: ThemeData(
         primarySwatch: Colors.brown,
         accentColor: Colors.amber,
@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Compare that Price')
+        title: Text('LABL')
       ),
       body: _index < 2
           ? _index == 0 ? ProductsList() : CameraPage()
