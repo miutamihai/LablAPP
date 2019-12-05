@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import './widgets/log_in.dart';
 import './widgets/create_account.dart';
-import './widgets/gallery.dart';
+//import './widgets/gallery.dart';
 import './widgets/camera_page.dart';
 import './widgets/products_list.dart';
 //import './widgets/imageInput.dart';
