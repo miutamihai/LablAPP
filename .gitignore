@@ -29,6 +29,8 @@
 .pub-cache/
 .pub/
 /build/
+# pubspec.lock is needed for application packages
+pubspec.lock
 
 # Android related
 **/android/**/gradle-wrapper.jar
