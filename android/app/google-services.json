@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "782297919919",
+    "firebase_url": "https://comparethatprice-products.firebaseio.com",
+    "project_id": "comparethatprice-products",
+    "storage_bucket": "comparethatprice-products.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782297919919:android:57b6dee90145abdb9bff5a",
+        "android_client_info": {
+          "package_name": "adam_o.compare_that_price"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "782297919919-pcsi6vna1tvqped43j4kph17qi9agbm0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0E9CByRq-3NJH_RoazD_zSbz6yAdN_C4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "782297919919-pcsi6vna1tvqped43j4kph17qi9agbm0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
