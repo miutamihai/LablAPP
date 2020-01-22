@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import './widgets/log_in.dart';
 import './widgets/create_account.dart';
 //import './widgets/gallery.dart';
-//import './widgets/camera_page.dart';
+import './widgets/camera_page.dart';
 import './widgets/products_list.dart';
 //import './widgets/imageInput.dart';
 
@@ -45,7 +45,8 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text('LABL')
       ),
       body: _index < 2
-          ? _index == 0 ? ProductsList() : Text('Camera placeholder')
+          //? _index == 0 ? ProductsList() : Text('Camera placeholder')
+          ? _index == 0 ? ProductsList() : CameraPage()
           : _logInPage ? LogIn(_setLogInOrCreatePage) : CreateAccount(_setLogInOrCreatePage),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).accentColor,
