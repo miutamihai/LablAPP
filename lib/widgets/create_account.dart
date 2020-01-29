@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class CreateAccount extends StatefulWidget {
   final Function logIn;
@@ -13,15 +14,39 @@ class _CreateAccountState extends State<CreateAccount> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmationController = TextEditingController();
+  final _auth = FirebaseAuth.instance;
+  FirebaseUser loggedUser; // for test logged user
 
-  void submitData() {
+  void submitData() async {
     final enteredEmail = emailController.text;
     final enteredPassword = passwordController.text;
     final confirmedPassword = confirmationController.text;
 
-    if (enteredEmail.isEmpty || enteredPassword.isEmpty || confirmedPassword.isEmpty) {
+    if (enteredEmail.isEmpty ||
+        enteredPassword.isEmpty ||
+        confirmedPassword.isEmpty) {
       return;
     }
+
+    if (enteredPassword != confirmedPassword) {
+      return;
+    }
+
+    print(enteredEmail);
+    print(enteredPassword);
+    print(confirmedPassword);
+
+  //   try {
+  //     final newUser = _auth.createUserWithEmailAndPassword(
+  //       email: enteredEmail,
+  //       password: enteredPassword,
+  //     );
+  //     if (newUser != null) {
+  //       // redirect to previous page
+  //     }
+  //   } catch (e) {
+  //     print(e);
+  //   }
   }
 
   @override
@@ -41,11 +66,14 @@ class _CreateAccountState extends State<CreateAccount> {
                 onSubmitted: (_) => submitData(),
               ),
               TextField(
+                //textAlign: TextAlign.center,
+                obscureText: true,
                 decoration: InputDecoration(labelText: 'Password'),
                 controller: passwordController,
                 onSubmitted: (_) => submitData(),
               ),
               TextField(
+                obscureText: true,
                 decoration: InputDecoration(labelText: 'Confirm password'),
                 controller: confirmationController,
                 onSubmitted: (_) => submitData(),

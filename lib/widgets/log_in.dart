@@ -39,6 +39,7 @@ class _LogInState extends State<LogIn> {
                 onSubmitted: (_) => submitData(),
               ),
               TextField(
+                obscureText: true,
                 decoration: InputDecoration(labelText: 'Password'),
                 controller: passwordController,
                 onSubmitted: (_) => submitData(),
