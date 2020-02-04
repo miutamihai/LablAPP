@@ -24,10 +24,13 @@
 **/doc/api/
 .dart_tool/
 .flutter-plugins
+.flutter-plugins-dependencies
 .packages
 .pub-cache/
 .pub/
 /build/
+# pubspec.lock is needed for application packages
+#pubspec.lock
 
 # Android related
 **/android/**/gradle-wrapper.jar

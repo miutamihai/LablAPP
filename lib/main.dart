@@ -45,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text('LABL')
       ),
       body: _index < 2
+          //? _index == 0 ? ProductsList() : Text('Camera placeholder')
           ? _index == 0 ? ProductsList() : CameraPage()
           : _logInPage ? LogIn(_setLogInOrCreatePage) : CreateAccount(_setLogInOrCreatePage),
       bottomNavigationBar: BottomNavigationBar(
