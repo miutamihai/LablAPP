@@ -63,20 +63,6 @@ class CameraPage extends StatefulWidget {
             ),
           ),
       );
-            /* Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  //_cameraTogglesRowWidget(),
-                  _cameraPreviewWidget(),
-                  //_thumbnailWidget(),
-                ],
-              ),
-            ), */
-          /* ],
-        ),
-      ); */
     }
   
     /// Display 'Loading' text when the camera is still loading.
@@ -96,6 +82,7 @@ class CameraPage extends StatefulWidget {
               alignment: Alignment.bottomCenter,
               child:
               FloatingActionButton(
+              heroTag: "CameraButton",
               onPressed: controller != null &&
                     controller.value.isInitialized
                     ? _onCapturePressed
@@ -111,79 +98,7 @@ class CameraPage extends StatefulWidget {
         
       );
     }
-  
-    /// Display the thumbnail of the captured image
-    /* Widget _thumbnailWidget() {
-      return Expanded(
-        child: Align(
-          alignment: Alignment.centerRight,
-          child: imagePath == null
-            ? SizedBox()
-            : SizedBox(
-              child: Image.file(File(imagePath)),
-              width: 64.0,
-              height: 64.0,
-            ),
-        ),
-      );
-    } */
-  
-    /// Display the control bar with buttons to take pictures
-    /* Widget _captureControlRowWidget() {
-      return Expanded(
-        child: Align(
-          alignment: Alignment.center,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              IconButton(
-                icon: const Icon(Icons.camera_alt),
-                color: Colors.blue,
-                
-              )
-            ],
-          ),
-        ),
-      );
-    } */
-  
-    /// Display a row of toggle to select the camera (or a message if no camera is available).
-    /* Widget _cameraTogglesRowWidget() {
-      if (cameras == null) {
-        return Row();
-      }
-  
-      CameraDescription selectedCamera = cameras[selectedCameraIdx];
-      CameraLensDirection lensDirection = selectedCamera.lensDirection;
-  
-      return Expanded(
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: FlatButton.icon(
-              onPressed: _onSwitchCamera,
-              icon: Icon(
-                  _getCameraLensIcon(lensDirection)
-              ),
-              label: Text("${lensDirection.toString()
-                  .substring(lensDirection.toString().indexOf('.')+1)}")
-          ),
-        ),
-      );
-    } */
-  
-    /* IconData _getCameraLensIcon(CameraLensDirection direction) {
-      switch (direction) {
-        case CameraLensDirection.back:
-          return Icons.camera_rear;
-        case CameraLensDirection.front:
-          return Icons.camera_front;
-        case CameraLensDirection.external:
-          return Icons.camera;
-        default:
-          return Icons.device_unknown;
-      }
-    } */
+
   
      Future _onCameraSwitched(CameraDescription cameraDescription) async {
       if (controller != null) {
@@ -220,19 +135,6 @@ class CameraPage extends StatefulWidget {
         setState(() {});
       }
     }
-  
-    /* void _onSwitchCamera() {
-      selectedCameraIdx = selectedCameraIdx < cameras.length - 1
-          ? selectedCameraIdx + 1
-          : 0;
-      CameraDescription selectedCamera = cameras[selectedCameraIdx];
-  
-      _onCameraSwitched(selectedCamera);
-  
-      setState(() {
-        selectedCameraIdx = selectedCameraIdx;
-      });
-    }  */
   
     Future _takePicture() async {
       if (!controller.value.isInitialized) {
@@ -279,17 +181,6 @@ class CameraPage extends StatefulWidget {
               MaterialPageRoute(builder: (context) => ShowImage(imagePath)),
             );
           });
-  
-          /* if (filePath != null) {
-            Fluttertoast.showToast(
-                msg: 'Picture saved to $filePath',
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.CENTER,
-                timeInSecForIos: 2,
-                backgroundColor: Colors.grey,
-                textColor: Colors.white
-            );
-          } */
         }
       });
     }
