@@ -45,11 +45,7 @@ android {
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-<<<<<<< HEAD
         testInstrumentationRunner "androidx.support.test.runner.AndroidJUnitRunner"
-=======
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
->>>>>>> 476b36b7ef986cd51ca7735991d9c374012adc3c
     }
 
     buildTypes {
@@ -68,12 +64,7 @@ flutter {
 dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.0'
     testImplementation 'junit:junit:4.12'
-<<<<<<< HEAD
-    androidTestImplementation 'com.androidx.test:runner:1.1.0'
-    androidTestImplementation 'com.androidx.test.espresso:espresso-core:3.1.0'
-=======
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
->>>>>>> 476b36b7ef986cd51ca7735991d9c374012adc3c
 }
