@@ -1,9 +1,11 @@
-import 'dart:io';
+import 'dart:io' show File;
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImageInput extends StatefulWidget {
+  static const String id = 'image_input';
+  
   @override
   _ImageInputState createState() => _ImageInputState();
 }

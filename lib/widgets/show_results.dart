@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class ShowResult extends StatefulWidget {
-
+  static const String id = 'show_result';
   final Response finalResponse;
 
   ShowResult({@required this.finalResponse});

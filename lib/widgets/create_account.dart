@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import './show_user.dart';
+
 class CreateAccount extends StatefulWidget {
+  static const String id = 'create_account';
   final Function logIn;
 
   CreateAccount(this.logIn);
@@ -15,38 +18,35 @@ class _CreateAccountState extends State<CreateAccount> {
   final passwordController = TextEditingController();
   final confirmationController = TextEditingController();
   final _auth = FirebaseAuth.instance;
-  FirebaseUser loggedUser; // for test logged user
 
   void submitData() async {
-    final enteredEmail = emailController.text;
-    final enteredPassword = passwordController.text;
-    final confirmedPassword = confirmationController.text;
+    final _enteredEmail = emailController.text;
+    final _enteredPassword = passwordController.text;
+    final _confirmedPassword = confirmationController.text;
 
-    if (enteredEmail.isEmpty ||
-        enteredPassword.isEmpty ||
-        confirmedPassword.isEmpty) {
+    if (_enteredEmail.isEmpty ||
+        _enteredPassword.isEmpty ||
+        _confirmedPassword.isEmpty) {
       return;
     }
 
-    if (enteredPassword != confirmedPassword) {
+    if (_enteredPassword != _confirmedPassword) {
       return;
     }
 
-    print(enteredEmail);
-    print(enteredPassword);
-    print(confirmedPassword);
+    print(_enteredEmail);
+    print(_enteredPassword);
+    print(_confirmedPassword);
 
-    //   try {
-    //     final newUser = _auth.createUserWithEmailAndPassword(
-    //       email: enteredEmail,
-    //       password: enteredPassword,
-    //     );
-    //     if (newUser != null) {
-    //       // redirect to previous page
-    //     }
-    //   } catch (e) {
-    //     print(e);
-    //   }
+    try {
+      final newUser = await _auth.createUserWithEmailAndPassword(
+          email: _enteredEmail, password: _enteredPassword);
+      if (newUser != null) {
+        Navigator.pushNamed(context, ShowUser.id);
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override

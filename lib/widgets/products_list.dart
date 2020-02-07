@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../models/product.dart';
 
 class ProductsList extends StatelessWidget {
+  static const String id = 'products_list';
   final List<Product> _products = [
     Product(
       name: 'Tyskie',

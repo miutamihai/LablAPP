@@ -6,6 +6,7 @@ import './widgets/create_account.dart';
 import './widgets/camera_page.dart';
 import './widgets/products_list.dart';
 //import './widgets/imageInput.dart';
+import './widgets/show_user.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,12 +19,19 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.brown,
         accentColor: Colors.amber,
       ),
-      home: MyHomePage(),
+      //home: MyHomePage(),
+      initialRoute: MyHomePage.id,
+      routes: {
+        MyHomePage.id: (context) => MyHomePage(),
+        ShowUser.id: (context) => ShowUser(),
+      },
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  static const String id = 'my_home_page';
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }

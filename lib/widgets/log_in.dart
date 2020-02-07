@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LogIn extends StatefulWidget {
+  static const String id = 'log_in';
   final Function logIn;
 
   LogIn(this.logIn);
