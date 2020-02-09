@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class ShowResult extends StatefulWidget {
 
-  final Response finalResponse;
+  final String finalResponse;
 
   ShowResult({@required this.finalResponse});
 
@@ -12,13 +12,11 @@ class ShowResult extends StatefulWidget {
 }
 
 class _ShowResultState extends State<ShowResult> {
-
-  
-
   @override
   Widget build(BuildContext context) {
+    print(widget.finalResponse);
     return Container(
-      child: Text(widget.finalResponse.data),
+      child: Text(widget.finalResponse),
     );
   }
 }
