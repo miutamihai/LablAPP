@@ -26,7 +26,7 @@
 
 3. Currently, application testing will focus on the Android version.
 
-4. [Link to ours Trello Board](https://trello.com/b/UdiiXOaY/member-assignments)
+4. [Link to our Trello Board](https://trello.com/b/UdiiXOaY/member-assignments)
 
 ---
 ## Getting Started with flutter:
