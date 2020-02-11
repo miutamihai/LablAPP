@@ -1,9 +1,8 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class ShowResult extends StatefulWidget {
 
-  final Response finalResponse;
+  final String finalResponse;
 
   ShowResult({@required this.finalResponse});
 
@@ -17,8 +16,15 @@ class _ShowResultState extends State<ShowResult> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(widget.finalResponse.data),
+    if(widget.finalResponse == null){
+      print("ERROR NULL STRING");
+      return Container();
+    }
+    else{
+      return Container(
+      child: Text(widget.finalResponse),
     );
+    }
+    
   }
 }

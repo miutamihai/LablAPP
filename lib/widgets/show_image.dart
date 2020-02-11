@@ -1,9 +1,11 @@
+import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:compare_that_price/widgets/show_results.dart';
 import 'package:flutter/material.dart';
 
-import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
 
 class ShowImage extends StatelessWidget{
   
@@ -43,16 +45,9 @@ class ShowImage extends StatelessWidget{
               FloatingActionButton(
               heroTag: "btn2",
               onPressed: () async {
-                Dio dio = new Dio();
-                Response response= new Response();
-                response = await dio.post("https://lablapi.appspot.com/", 
-                                    data: postTest(),
-                                    onSendProgress: (int sent, int total) {
-                                      print("$sent $total");
-                                    },
-                );
+                String response= await sendImage();
                 Navigator.push(context, 
-                MaterialPageRoute(builder: (context) => ShowResult( finalResponse: response,)),
+                MaterialPageRoute(builder: (context) => ShowResult( finalResponse: response, /* finalResponse: response */)),
                 );
               },
               child:Icon(Icons.arrow_forward),          
@@ -66,12 +61,30 @@ class ShowImage extends StatelessWidget{
     );
   }
 
-  Future<FormData> postTest() async {
-  return FormData.fromMap({
-    "country": "Ireland",
-    "password": "L@blAPI1268.!",
-    "file":
-    await MultipartFile.fromFile('./assets/images/budweiser-can-440ml.jpg', filename: "sent.png")
-  });
-}
+  Future<String> sendImage() async {
+    
+    File image = File(path);
+
+    var uri = Uri.parse('https://lablapi.appspot.com');
+
+    Map<String, String> headers = { "content-type": "multipart/form-data" };
+
+    var request = new http.MultipartRequest("POST", uri);
+    request.headers.addAll(headers);
+    List<int> imageBytes = await image.readAsBytes();
+    print("Bytes:");
+    print(imageBytes.length);
+    print(imageBytes.toString());
+    request.fields.addEntries([new MapEntry('password', 'L@blAPI1268.!'),
+      new MapEntry('country', 'Ireland'),
+      //new MapEntry('image', imageBytes.toString()),
+    ]);
+    var response = await request.send();
+    print(response.statusCode);
+    response.stream.transform(utf8.decoder).listen((value) {
+      print(value);
+      return value;
+    });
+    
+  }
 }
