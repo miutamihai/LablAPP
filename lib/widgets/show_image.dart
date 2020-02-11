@@ -1,10 +1,10 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:compare_that_price/widgets/show_results.dart';
 import 'package:compare_that_price/widgets/show_result_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 
 class ShowImage extends StatelessWidget{
@@ -26,15 +26,9 @@ class ShowImage extends StatelessWidget{
     ]);
     request.files.add(imageToBeSent);
     var response = await request.send();
-    String requestedData;
-    print(response.statusCode);
-    response.stream.transform(utf8.decoder).listen((value) {
-      requestedData = value;
-    });
-    return requestedData;
+    var finalResult = await response.stream.bytesToString();
+    return finalResult;
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -85,5 +79,4 @@ class ShowImage extends StatelessWidget{
       ]
     );
   }
-
 }
