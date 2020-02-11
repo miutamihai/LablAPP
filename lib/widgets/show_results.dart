@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class ShowResult extends StatefulWidget {
@@ -14,9 +13,15 @@ class ShowResult extends StatefulWidget {
 class _ShowResultState extends State<ShowResult> {
   @override
   Widget build(BuildContext context) {
-    print(widget.finalResponse);
-    return Container(
+    if(widget.finalResponse == null){
+      print("ERROR NULL STRING");
+      return Container();
+    }
+    else{
+      return Container(
       child: Text(widget.finalResponse),
     );
+    }
+    
   }
 }
