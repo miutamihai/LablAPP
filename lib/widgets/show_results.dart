@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class ShowResult extends StatefulWidget {
-
   final String finalResponse;
 
   ShowResult({@required this.finalResponse});
