@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Gallery extends StatelessWidget {
+  static const String id = 'gallery';
+
   @override
   Widget build(BuildContext context) {
     return GridView.count(

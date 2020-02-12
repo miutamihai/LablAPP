@@ -7,22 +7,17 @@ import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 
-class ShowImage extends StatelessWidget{
-  
+class ShowImage extends StatelessWidget {
+  static const String id = 'show_image';
   final String path;
 
   ShowImage(this.path);
 
   @override
   Widget build(BuildContext context) {
-
-    return Stack(
-      children: <Widget>[
-        Container(
-          child: 
-               Image.file(File(path))
-        ),
-        Row(
+    return Stack(children: <Widget>[
+      Container(child: Image.file(File(path))),
+      Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children:[
@@ -55,10 +50,8 @@ class ShowImage extends StatelessWidget{
               Text("Submit")
               ],
             )
-          ]
-        ) 
-      ]
-    );
+          ])
+    ]);
   }
 
   Future<String> sendImage() async {

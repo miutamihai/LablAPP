@@ -8,6 +8,7 @@ import 'package:camera/camera.dart';
 
 
 class CameraPage extends StatefulWidget {
+  static const String id = 'camera_page';
 
   @override
   State<StatefulWidget> createState() {
