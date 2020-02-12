@@ -47,7 +47,8 @@ class _CreateAccountState extends State<CreateAccount> {
       final newUser = await _auth.createUserWithEmailAndPassword(
           email: enteredEmail, password: enteredPassword);
       if (newUser != null) {
-        Navigator.pushNamed(context, ShowUser.id);
+        //Navigator.pushNamed(context, ShowUser.id);
+        Navigator.pop(context);
       }
       setState(() {
         showSpinner = false;

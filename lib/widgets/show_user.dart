@@ -33,6 +33,7 @@ class _ShowUserState extends State<ShowUser> {
   @override
   Widget build(BuildContext context) {
     return Center(child: FloatingActionButton(
+      child: Icon(Icons.close),
       onPressed: () {
         _auth.signOut();
         Navigator.pop(context);
