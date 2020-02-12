@@ -32,18 +32,11 @@ class _ShowUserState extends State<ShowUser> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          Text('You are logged in with email:'),
-          //Text(loggedUser.email),
-          // RaisedButton(
-          //   child: Text('Log in'),
-          //   textColor: Theme.of(context).primaryColor,
-          //   onPressed: () => widget.logIn(true), // go to logIn page
-          // ),
-        ],
-      ),
-    );
+    return Center(child: FloatingActionButton(
+      onPressed: () {
+        _auth.signOut();
+        Navigator.pop(context);
+      },
+    ));
   }
 }
