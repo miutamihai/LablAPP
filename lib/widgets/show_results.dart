@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 
 import 'package:path/path.dart';
-
 class ShowResult extends StatelessWidget {
   final finalResponse;
   final image;
