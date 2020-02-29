@@ -1,27 +1,39 @@
+import 'package:compare_that_price/widgets/show_main_info.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
 
-class ShowResult extends StatefulWidget {
-  static const String id = 'show_result';
-  final String finalResponse;
+import 'package:path/path.dart';
 
-  ShowResult({@required this.finalResponse});
+class ShowResult extends StatelessWidget {
+  final finalResponse;
+  final image;
 
-  @override
-  _ShowResultState createState() => _ShowResultState();
-}
+  ShowResult({@required this.finalResponse, @required this.image});
 
-class _ShowResultState extends State<ShowResult> {
+  Widget showImage(MediaQueryData mediaQueryData) {
+    return Container(
+        color: Colors.white,
+        height: mediaQueryData.size.height,
+        width: mediaQueryData.size.width,
+        child: //Image.asset(image),
+            FittedBox(
+          fit: BoxFit.fitHeight,
+          child: Image.file(image),
+                //image //TODO: This should be the final implementation
+        ) // test purposes
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
-    if(widget.finalResponse == null){
-      print("ERROR NULL STRING");
-      return Container();
-    }
-    else{
-      return Container(
-      child: Text(widget.finalResponse),
-    );
-    }
     
+    return SafeArea(
+      child: Stack(children: <Widget>[
+        showImage(MediaQuery.of(context)),
+        ShowMainInfo(finalResponse),
+      ]),
+    );
   }
 }
+
