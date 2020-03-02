@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 //import 'package:intl/intl.dart';
 
 import '../models/product.dart';
+import 'smart_flare_animation.dart';
 
 class ProductsList extends StatelessWidget {
   static const String id = 'products_list';
@@ -56,69 +57,83 @@ class ProductsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (ctx, index) {
-        return Card(
-          child: Row(
-            children: [
-              Container(
-                height: 120,
-                padding: EdgeInsets.all(10),
-                child: 
-                Image.asset(_products[index].image)
-                /* Image.asset(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('LABL'),
+        backgroundColor: Colors.amber,
+      ),
+      body: Stack(
+        children: <Widget>[
+          ListView.builder(
+            itemBuilder: (ctx, index) {
+              return Card(
+                child: Row(
+                  children: [
+                    Container(
+                        height: 120,
+                        padding: EdgeInsets.all(10),
+                        child:
+                        Image.asset(_products[index].image)
+                      /* Image.asset(
                   //'assets/images/emoticon-heart-4mp-free.png',
                   _products[index].image,
                   fit: BoxFit.cover, */
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    child: Text(
-                      _products[index].name,
-                      style: Theme.of(context).textTheme.title,
                     ),
-                  ),
-                  Row(
-                    //mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        _products[index].size,
-                        style: TextStyle(
-                          color: Colors.grey,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 15,
-                        ),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Theme.of(context).primaryColor,
-                            width: 2,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          child: Text(
+                            _products[index].name,
+                            style: Theme.of(context).textTheme.title,
                           ),
                         ),
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                          '\$${_products[index].price.toStringAsFixed(2)}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                            color: Theme.of(context).primaryColor,
-                          ),
+                        Row(
+                          //mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              _products[index].size,
+                              style: TextStyle(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                vertical: 10,
+                                horizontal: 15,
+                              ),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Theme.of(context).primaryColor,
+                                  width: 2,
+                                ),
+                              ),
+                              padding: EdgeInsets.all(10),
+                              child: Text(
+                                '\$${_products[index].price.toStringAsFixed(2)}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            },
+            itemCount: _products.length,
           ),
-        );
-      },
-      itemCount: _products.length,
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: SmartFlareAnimation(),
+          )
+        ],
+      ),
     );
   }
 }

@@ -1,14 +1,32 @@
 import 'package:compare_that_price/widgets/show_main_info.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
+import 'dart:async';
+import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'loading_screen.dart';
 
-import 'package:path/path.dart';
 class ShowResult extends StatelessWidget {
-  final finalResponse;
   final image;
 
-  ShowResult({@required this.finalResponse, @required this.image});
+  Future<String> sendImage(File image) async {
+    var uri = Uri.parse('https://lablapi.appspot.com/');
+    Map<String, String> headers = {'content-type': 'multipart/form-data'};
+    var request = http.MultipartRequest('POST', uri);
+    request.headers.addAll(headers);
+    var imageToBeSent = http.MultipartFile(
+        'file', image.openRead(), await image.length(),
+        filename: 'sent-file.png');
+    request.fields.addEntries([
+      MapEntry('password', 'L@blAPI1268.!'),
+      MapEntry('country', 'Ireland'),
+    ]);
+    request.files.add(imageToBeSent);
+    var response = await request.send();
+    var finalResult = await response.stream.bytesToString();
+    return finalResult;
+  }
+
+  ShowResult({@required this.image});
 
   Widget showImage(MediaQueryData mediaQueryData) {
     return Container(
@@ -26,13 +44,24 @@ class ShowResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-    return SafeArea(
-      child: Stack(children: <Widget>[
-        showImage(MediaQuery.of(context)),
-        ShowMainInfo(finalResponse),
-      ]),
+
+    return FutureBuilder<String>(
+        future: sendImage(image),
+        builder: (BuildContext context, AsyncSnapshot<String> snapshot){
+            if(snapshot.connectionState == ConnectionState.waiting){
+              return Loader();
+            }
+            else
+              return SafeArea(
+                child: Stack(children: <Widget>[
+                  showImage(MediaQuery.of(context)),
+                  ShowMainInfo(snapshot.data),
+                ]),
+              );
+        },
     );
+
+
   }
 }
 

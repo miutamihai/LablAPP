@@ -5,7 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-
+import 'smart_flare_animation.dart';
 
 class CameraPage extends StatefulWidget {
   static const String id = 'camera_page';
@@ -16,191 +16,174 @@ class CameraPage extends StatefulWidget {
   }
 }
 
-  class CameraScreenstate extends State<CameraPage>{
+class CameraScreenstate extends State<CameraPage> {
+  CameraController controller;
+  List cameras;
+  int selectedCameraIdx;
+  String imagePath;
 
-    CameraController controller;
-    List cameras;
-    int selectedCameraIdx;
-    String imagePath;
-  
-  
-    @override
-    void initState() {
-      super.initState();
-  
-      // Get the list of available cameras.
-      // Then set the first camera as selected.
-      availableCameras()
-      .then((availableCameras) {
-        cameras = availableCameras;
-  
-        if (cameras.length > 0) {
-          setState(() {
-            selectedCameraIdx = 0;
-          });
-  
-          _onCameraSwitched(cameras[selectedCameraIdx]).then((void v) {});
-        }
-      })
-      .catchError((err) {
-        print('Error: $err.code\nError Message: $err.message');
-      });
-    }
-  
-    @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-       /*  body: Column(
+  @override
+  void initState() {
+    super.initState();
+
+    // Get the list of available cameras.
+    // Then set the first camera as selected.
+    availableCameras().then((availableCameras) {
+      cameras = availableCameras;
+
+      if (cameras.length > 0) {
+        setState(() {
+          selectedCameraIdx = 0;
+        });
+
+        _onCameraSwitched(cameras[selectedCameraIdx]).then((void v) {});
+      }
+    }).catchError((err) {
+      print('Error: $err.code\nError Message: $err.message');
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      /*  body: Column(
           children: [ */
-        body: Container(
-            child: Padding(
-              padding: const EdgeInsets.all(1.0),
-              child: Center(
-                child: _cameraPreviewWidget(),
-              ),
-            ),
-            decoration: BoxDecoration(
-              color: Colors.black,
-            ),
+      body: Container(
+        child: Padding(
+          padding: const EdgeInsets.all(1.0),
+          child: Center(
+            child: _cameraPreviewWidget(),
           ),
+        ),
+        decoration: BoxDecoration(
+          color: Colors.black,
+        ),
+      ),
+    );
+  }
+
+  /// Display 'Loading' text when the camera is still loading.
+  Widget _cameraPreviewWidget() {
+    if (controller == null || !controller.value.isInitialized) {
+      return const Center(
+        child: CircularProgressIndicator(),
       );
     }
-  
-    /// Display 'Loading' text when the camera is still loading.
-    Widget _cameraPreviewWidget() {
-      if (controller == null || !controller.value.isInitialized) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      }
-  
-      return AspectRatio(
+
+    return AspectRatio(
         aspectRatio: controller.value.aspectRatio,
         child: Stack(
           children: <Widget>[
             CameraPreview(controller),
             Align(
-              alignment: Alignment.bottomCenter,
-              child:
-              FloatingActionButton(
-              heroTag: "CameraButton",
-              onPressed: controller != null &&
-                    controller.value.isInitialized
-                    ? _onCapturePressed
-                    : null,
-              child: Icon(Icons.camera_enhance),
-            ) ,)
-            
-
+                alignment: Alignment.bottomCenter,
+                child: GestureDetector(
+                  onTap: () {
+                    if (SmartFlareAnimation().shouldTakePicture &&
+                        controller != null &&
+                        controller.value.isInitialized) {
+                      _onCapturePressed();
+                    }
+                  },
+                  child: SmartFlareAnimation(),
+                )),
           ],
-          )
-        
-        
-        
-      );
+        ));
+  }
+
+  Future _onCameraSwitched(CameraDescription cameraDescription) async {
+    if (controller != null) {
+      await controller.dispose();
     }
 
-  
-     Future _onCameraSwitched(CameraDescription cameraDescription) async {
-      if (controller != null) {
-        await controller.dispose();
-      }
-  
-      controller = CameraController(cameraDescription, ResolutionPreset.high);
-  
-      // If the controller is updated then update the UI.
-      controller.addListener(() {
-        if (mounted) {
-          setState(() {});
-        }
-  
-        if (controller.value.hasError) {
-          Fluttertoast.showToast(
-              msg: 'Camera error ${controller.value.errorDescription}',
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIos: 1,
-              backgroundColor: Colors.red,
-              textColor: Colors.white
-          );
-        }
-      });
-  
-      try {
-        await controller.initialize();
-      } on CameraException catch (e) {
-        _showCameraException(e);
-      }
-  
+    controller = CameraController(cameraDescription, ResolutionPreset.high);
+
+    // If the controller is updated then update the UI.
+    controller.addListener(() {
       if (mounted) {
         setState(() {});
       }
-    }
-  
-    Future _takePicture() async {
-      if (!controller.value.isInitialized) {
+
+      if (controller.value.hasError) {
         Fluttertoast.showToast(
-            msg: 'Please wait',
+            msg: 'Camera error ${controller.value.errorDescription}',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIos: 1,
-            backgroundColor: Colors.grey,
-            textColor: Colors.white
-        );
-  
-        return null;
+            backgroundColor: Colors.red,
+            textColor: Colors.white);
       }
-  
-      // Do nothing if a capture is on progress
-      if (controller.value.isTakingPicture) {
-        return null;
-      }
-  
-      final Directory appDirectory = await getApplicationDocumentsDirectory();
-      final String pictureDirectory = '${appDirectory.path}/Pictures';
-      await Directory(pictureDirectory).create(recursive: true);
-      final String currentTime = DateTime.now().millisecondsSinceEpoch.toString();
-      final String filePath = '$pictureDirectory/$currentTime.jpg';
-  
-      try {
-        await controller.takePicture(filePath);
-      } on CameraException catch (e) {
-        _showCameraException(e);
-        return null;
-      }
-  
-      return filePath;
+    });
+
+    try {
+      await controller.initialize();
+    } on CameraException catch (e) {
+      _showCameraException(e);
     }
-  
-    void _onCapturePressed() {
-      _takePicture().then((filePath) {
-        if (mounted) {
-          setState(() {
-            imagePath = filePath;
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ShowImage(imagePath)),
-            );
-          });
-        }
-      });
+
+    if (mounted) {
+      setState(() {});
     }
-  
-    void _showCameraException(CameraException e) {
-      String errorText = 'Error: ${e.code}\nError Message: ${e.description}';
-      print(errorText);
-  
+  }
+
+  Future _takePicture() async {
+    if (!controller.value.isInitialized) {
       Fluttertoast.showToast(
-          msg: 'Error: ${e.code}\n${e.description}',
+          msg: 'Please wait',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIos: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white
-      );
+          backgroundColor: Colors.grey,
+          textColor: Colors.white);
+
+      return null;
     }
+
+    // Do nothing if a capture is on progress
+    if (controller.value.isTakingPicture) {
+      return null;
+    }
+
+    final Directory appDirectory = await getApplicationDocumentsDirectory();
+    final String pictureDirectory = '${appDirectory.path}/Pictures';
+    await Directory(pictureDirectory).create(recursive: true);
+    final String currentTime = DateTime.now().millisecondsSinceEpoch.toString();
+    final String filePath = '$pictureDirectory/$currentTime.jpg';
+
+    try {
+      await controller.takePicture(filePath);
+    } on CameraException catch (e) {
+      _showCameraException(e);
+      return null;
+    }
+
+    return filePath;
   }
-  
 
+  void _onCapturePressed() {
+    _takePicture().then((filePath) {
+      if (mounted) {
+        setState(() {
+          imagePath = filePath;
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ShowImage(imagePath)),
+          );
+        });
+      }
+    });
+  }
 
-  
+  void _showCameraException(CameraException e) {
+    String errorText = 'Error: ${e.code}\nError Message: ${e.description}';
+    print(errorText);
+
+    Fluttertoast.showToast(
+        msg: 'Error: ${e.code}\n${e.description}',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIos: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white);
+  }
+}

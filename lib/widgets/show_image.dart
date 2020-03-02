@@ -1,33 +1,14 @@
 
-import 'dart:async';
 import 'dart:io';
 
 import 'package:compare_that_price/widgets/show_results.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'show_results.dart';
 
 class ShowImage extends StatelessWidget {
   final String path;
 
   ShowImage(this.path);
-
-  Future<String> sendImage(File image) async {
-    var uri = Uri.parse('https://lablapi.appspot.com/');
-    Map<String, String> headers = {'content-type': 'multipart/form-data'};
-    var request = http.MultipartRequest('POST', uri);
-    request.headers.addAll(headers);
-    var imageToBeSent = http.MultipartFile(
-        'file', image.openRead(), await image.length(),
-        filename: 'sent-file.png');
-    request.fields.addEntries([
-      MapEntry('password', 'L@blAPI1268.!'),
-      MapEntry('country', 'Ireland'),
-    ]);
-    request.files.add(imageToBeSent);
-    var response = await request.send();
-    var finalResult = await response.stream.bytesToString();
-    return finalResult;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,12 +40,11 @@ class ShowImage extends StatelessWidget {
                   heroTag: "btn2",
                   onPressed: () async {
                     File image = File(path);
-                    String response = await sendImage(image);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              ShowResult(finalResponse: response,image: image,)),
+                              ShowResult(image: image)),
                     );
                   },
                   child: Icon(Icons.arrow_forward),

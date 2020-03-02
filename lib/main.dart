@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import './widgets/log_in.dart';
-import './widgets/create_account.dart';
 //import './widgets/gallery.dart';
 import './widgets/camera_page.dart';
-import './widgets/products_list.dart';
 //import './widgets/imageInput.dart';
 import './widgets/show_user.dart';
 
@@ -17,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'LABL',
       theme: ThemeData(
-        primarySwatch: Colors.brown,
+        primarySwatch: Colors.green,
         accentColor: Colors.amber,
       ),
       //home: MyHomePage(),
@@ -75,41 +72,13 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('LABL'),
+        backgroundColor: Colors.amber,
       ),
-      body: _index < 2
-          //? _index == 0 ? ProductsList() : Text('Camera placeholder')
-          ? _index == 0 ? ProductsList() : CameraPage()
-          : _logInPage ? LogIn(_setLogInOrCreatePage) : CreateAccount(_setLogInOrCreatePage),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Theme.of(context).accentColor,
-        onTap: (int index) {
-          setState(() {
-            if (_logOut && index==2) {
-              _auth.signOut();
-              this._logOut = false;
-            }
-            else {
-              this._index = index;
-              this._logInPage = true; // set logIn button to login page
-            }
-          });
-        },
-        currentIndex: _index,
-        items: [
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.photo_library),
-            title: new Text('Gallery'),
-          ),
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.camera),
-            title: new Text('Camera'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            title: _logOut ? Text('Log Out') : Text('Log In'),
-          ),
-        ],
-      ),
+      body:
+          Stack(children: <Widget>[
+            CameraPage(),
+          ],
+          )
     );
   }
 }
