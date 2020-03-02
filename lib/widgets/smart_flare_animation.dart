@@ -5,19 +5,25 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flare_flutter/flare_controls.dart';
 import 'products_list.dart';
 import 'camera_page.dart';
+import 'package:compare_that_price/helper_classes/take_picture_notification.dart';
 
 enum AnimationToPlay { Activate, Deactivate, CameraTapped, ImageTapped }
 
 // ignore: must_be_immutable
 class SmartFlareAnimation extends StatefulWidget {
-  bool shouldTakePicture = false;
+  final String function;
+  static _SmartFlareAnimationState of(BuildContext context) => context.ancestorStateOfType(const TypeMatcher<_SmartFlareAnimationState>());
   @override
-  _SmartFlareAnimationState createState() => _SmartFlareAnimationState();
+  SmartFlareAnimation(this.function);
+  _SmartFlareAnimationState createState() => _SmartFlareAnimationState(function);
 }
 
 class _SmartFlareAnimationState extends State<SmartFlareAnimation>
     with SingleTickerProviderStateMixin {
   final FlareControls animationControls = FlareControls();
+  String function;
+  _SmartFlareAnimationState(this.function);
+
 
   AnimationToPlay _animationToPlay = AnimationToPlay.Deactivate;
   AnimationToPlay _lastAnimationPlayed;
@@ -25,11 +31,11 @@ class _SmartFlareAnimationState extends State<SmartFlareAnimation>
   static const double AnimationWidth = 295.0;
   static const double AnimationHeight = 251.0;
   bool isOpen = false;
+  bool shouldTakePicture = false;
 
   @override
   void initState(){
     super.initState();
-    widget.shouldTakePicture = false;
   }
 
   @override
@@ -50,7 +56,7 @@ class _SmartFlareAnimationState extends State<SmartFlareAnimation>
 
               if (leftSideTouched && topHalfTouched) {
                 _setAnimationToPlay(AnimationToPlay.CameraTapped);
-                if(! widget.shouldTakePicture){
+                if(!shouldTakePicture){
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -59,7 +65,6 @@ class _SmartFlareAnimationState extends State<SmartFlareAnimation>
                 }
               } else if (rightSideTouched) {
                 _setAnimationToPlay(AnimationToPlay.ImageTapped);
-                widget.shouldTakePicture = false;
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -106,8 +111,9 @@ class _SmartFlareAnimationState extends State<SmartFlareAnimation>
     animationControls.play(_getAnimationName(animation));
 
     if(animation == AnimationToPlay.CameraTapped &&
-        _lastAnimationPlayed == AnimationToPlay.CameraTapped){
-        widget.shouldTakePicture = true;
+        function == 'take picture'){
+      shouldTakePicture = true;
+      TakePictureNotification(title: 'take picture')..dispatch(context);
     }
 
     _lastAnimationPlayed = animation;

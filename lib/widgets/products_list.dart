@@ -130,7 +130,7 @@ class ProductsList extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: SmartFlareAnimation(),
+            child: SmartFlareAnimation('navigate'),
           )
         ],
       ),

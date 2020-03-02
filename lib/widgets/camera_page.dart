@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:async';
+import 'package:compare_that_price/helper_classes/take_picture_notification.dart';
 import 'package:compare_that_price/widgets/show_image.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
@@ -70,25 +71,34 @@ class CameraScreenstate extends State<CameraPage> {
       );
     }
 
-    return AspectRatio(
-        aspectRatio: controller.value.aspectRatio,
-        child: Stack(
-          children: <Widget>[
-            CameraPreview(controller),
-            Align(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('LABL'),
+        backgroundColor: Colors.amber,
+      ),
+      body: AspectRatio(
+          aspectRatio: controller.value.aspectRatio,
+          child: Stack(
+            children: <Widget>[
+              CameraPreview(controller),
+              Align(
                 alignment: Alignment.bottomCenter,
-                child: GestureDetector(
-                  onTap: () {
-                    if (SmartFlareAnimation().shouldTakePicture &&
-                        controller != null &&
-                        controller.value.isInitialized) {
-                      _onCapturePressed();
-                    }
-                  },
-                  child: SmartFlareAnimation(),
-                )),
-          ],
-        ));
+                child: NotificationListener<TakePictureNotification>(
+                    onNotification: onCameraTap,
+                    child: GestureDetector(
+                      onTap: () {
+                        if (SmartFlareAnimation.of(context).shouldTakePicture &&
+                            controller != null &&
+                            controller.value.isInitialized) {
+                          _onCapturePressed();
+                        }
+                      },
+                      child: SmartFlareAnimation('take picture'),
+                    )),
+              )
+            ],
+          )),
+    );
   }
 
   Future _onCameraSwitched(CameraDescription cameraDescription) async {
@@ -185,5 +195,11 @@ class CameraScreenstate extends State<CameraPage> {
         timeInSecForIos: 1,
         backgroundColor: Colors.red,
         textColor: Colors.white);
+  }
+
+  bool onCameraTap(TakePictureNotification notification) {
+    if (controller != null &&
+        controller.value.isInitialized &&
+        notification.title == 'take picture') _onCapturePressed();
   }
 }
