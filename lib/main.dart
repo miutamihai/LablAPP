@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import './widgets/welcome_splash_screen.dart';
 //import './widgets/gallery.dart';
-import './widgets/camera_page.dart';
 //import './widgets/imageInput.dart';
 import './widgets/show_user.dart';
 
@@ -14,6 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'LABL',
       theme: ThemeData(
+        fontFamily: 'Acme',
         primarySwatch: Colors.green,
         accentColor: Colors.amber,
       ),
@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body:
           Stack(children: <Widget>[
-            CameraPage(),
+            WelcomeSplashScreen()
           ],
           )
     );

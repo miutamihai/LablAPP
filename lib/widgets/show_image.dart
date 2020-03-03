@@ -30,7 +30,11 @@ class ShowImage extends StatelessWidget {
                     Icons.keyboard_return,
                   ),
                 ),
-                Text("Repeat")
+                Text("Repeat",
+                  style: TextStyle(
+                    fontSize: 40,
+                    color: Colors.grey[300],
+                  ),)
               ],
             ),
             Column(
@@ -49,7 +53,14 @@ class ShowImage extends StatelessWidget {
                   },
                   child: Icon(Icons.arrow_forward),
                 ),
-                Text("Submit")
+                Text("Submit",
+                  style: TextStyle(
+                    fontSize: 40,
+                    foreground: Paint()
+                      ..style = PaintingStyle.stroke
+                      ..strokeWidth = 6
+                      ..color = Colors.blue[700],
+                  ),)
               ],
             )
           ])

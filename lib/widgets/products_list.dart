@@ -58,9 +58,18 @@ class ProductsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('LABL'),
-        backgroundColor: Colors.amber,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(44),
+        child: AppBar(
+          centerTitle: true,
+          title: Text(
+            '~LABL~',
+            style: TextStyle(
+                color: Colors.white70
+            ),),
+          backgroundColor: Colors.amber,
+          automaticallyImplyLeading: false,
+        ),
       ),
       body: Stack(
         children: <Widget>[

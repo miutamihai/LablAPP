@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'smart_flare_animation.dart';
 
+
 class CameraPage extends StatefulWidget {
   static const String id = 'camera_page';
-
   @override
   State<StatefulWidget> createState() {
     return CameraScreenstate();
@@ -72,9 +72,18 @@ class CameraScreenstate extends State<CameraPage> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('LABL'),
-        backgroundColor: Colors.amber,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(44),
+        child: AppBar(
+          centerTitle: true,
+          title: Text(
+              '~LABL~',
+          style: TextStyle(
+            color: Colors.white70
+          ),),
+          backgroundColor: Colors.amber,
+          automaticallyImplyLeading: false,
+        ),
       ),
       body: AspectRatio(
           aspectRatio: controller.value.aspectRatio,

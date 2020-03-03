@@ -19,7 +19,7 @@ class _LoaderState extends State<Loader> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.greenAccent,
+      backgroundColor: Colors.amberAccent,
       body: FlareActor('assets/animations/LogoLoadingScreen.flr',
           animation: _animation,
           fit: BoxFit.contain,
