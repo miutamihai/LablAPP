@@ -1,7 +1,7 @@
 import 'package:compare_that_price/widgets/camera_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import './widgets/welcome_splash_screen.dart';
+import './widgets/welcome_screen.dart';
 //import './widgets/gallery.dart';
 //import './widgets/imageInput.dart';
 import './widgets/show_user.dart';
@@ -73,8 +73,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body:
           Stack(children: <Widget>[
-            //WelcomeSplashScreen()
-            CameraPage()
+            WelcomeScreen()
+            //CameraPage()
           ],
           )
     );
