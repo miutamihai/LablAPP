@@ -1,10 +1,9 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:compare_that_price/widgets/camera_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:dashed_circle/dashed_circle.dart';
 import 'package:circular_reveal_animation/circular_reveal_animation.dart';
 
+// ignore: must_be_immutable
 class WelcomeSplashScreen extends StatefulWidget {
   @override
   _WelcomeSplashScreenState createState() => _WelcomeSplashScreenState();
@@ -15,11 +14,13 @@ class _WelcomeSplashScreenState extends State<WelcomeSplashScreen>
   AnimationController dot_rotation_controller;
   AnimationController reveal_controller;
   AnimationController text_fade_controller;
+  AnimationController title_fade_controller;
   Animation<double> reveal_animation;
   Animation dots_rotation_base;
   Animation inverted;
   Animation gap;
   Animation text_opacity;
+  Animation title_opacity;
   String logo_animation;
   bool animation_played = false;
 
@@ -29,10 +30,11 @@ class _WelcomeSplashScreenState extends State<WelcomeSplashScreen>
     super.initState();
     logo_animation = 'Idle Empty';
     text_fade_controller =
-      AnimationController(vsync: this, duration: Duration(seconds: 1));
+      AnimationController(vsync: this, duration: Duration(seconds: 2));
     dot_rotation_controller =
-        AnimationController(vsync: this, duration: Duration(seconds: 1));
-
+        AnimationController(vsync: this, duration: Duration(seconds: 2));
+    title_fade_controller =
+        AnimationController(vsync: this, duration: Duration(seconds: 2));
     dots_rotation_base =
         CurvedAnimation(parent: dot_rotation_controller, curve: Curves.easeOut)
           ..addStatusListener((status) {
@@ -65,6 +67,11 @@ class _WelcomeSplashScreenState extends State<WelcomeSplashScreen>
       }
     });
 
+    title_opacity = Tween<double>(
+      begin: 0,
+      end: 1
+    ).animate(title_fade_controller);
+
     inverted = Tween<double>(begin: 0.0, end: -1.0).animate(dots_rotation_base)
       ..addListener(() {
         setState(() {});
@@ -87,14 +94,17 @@ class _WelcomeSplashScreenState extends State<WelcomeSplashScreen>
                 dot_rotation_controller.forward();
                 text_fade_controller.forward();
               }
+            reveal_controller.reverse().whenComplete(() {
+
+            });
           });
     reveal_controller.forward();
   }
 
   @override
   void dispose() {
-    dot_rotation_controller.dispose();
     super.dispose();
+
   }
 
   @override
