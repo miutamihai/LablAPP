@@ -16,8 +16,10 @@ final Tween<Offset> _kRightMiddleTween = new Tween<Offset>(
   end: Offset.zero,
 );
 
+
 // Offset from offscreen below to fully on screen.
 class AppPageRoute extends MaterialPageRoute<String> {
+
   @override
   final bool maintainState;
 
@@ -88,7 +90,6 @@ class AppPageRoute extends MaterialPageRoute<String> {
 
 class _CustomPageTransition extends StatelessWidget {
   final Animation<Offset> _positionAnimation;
-
   final Widget child;
   final bool fullscreenDialog;
 
@@ -97,10 +98,10 @@ class _CustomPageTransition extends StatelessWidget {
     @required Animation<double> routeAnimation,
     @required this.child,
     @required this.fullscreenDialog,
-  })  : _positionAnimation = !fullscreenDialog
-      ? _kRightMiddleTween.animate(new CurvedAnimation(
-    parent: routeAnimation,
-    curve: Curves.elasticIn,
+  })  : _positionAnimation = !fullscreenDialog ?
+  _kRightMiddleTween.animate(new CurvedAnimation(
+  parent: routeAnimation,
+  curve: Curves.elasticIn,
   ))
       : _kBottomUpTween.animate(new CurvedAnimation(
     parent: routeAnimation, // The route's linear 0.0 - 1.0 animation.

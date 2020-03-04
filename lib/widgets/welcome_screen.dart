@@ -24,7 +24,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> with TickerProviderStateM
   String _logoAnimation;
 
   Future goToHeroPage() async {
-    await new Future.delayed(const Duration(milliseconds: 4000));
+    await new Future.delayed(const Duration(milliseconds: 3000));
     Navigator.of(context).push(
         new AppPageRoute(builder: (BuildContext context) => new CameraPage()));
   }
@@ -116,7 +116,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> with TickerProviderStateM
                       tag: 'app_title',
                       child: Text(
                         '~LABL~',
-                        style: TextStyle(fontSize: 40, fontFamily: 'Acme', decoration: TextDecoration.none),
+                        style: TextStyle(fontSize: 40, color: Colors.white70, fontFamily: 'Acme', decoration: TextDecoration.none),
                       ),
                     ),
                 ),
@@ -159,7 +159,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> with TickerProviderStateM
                   opacity: _textFadeAnimation,
                   child: Text(
                     'The dating app \n for beers  	🍻',
-                    style: TextStyle(fontSize: 30),
+                    style: TextStyle(fontSize: 30, color: Colors.white70),
                   ),
                 ),
               )

@@ -1,6 +1,5 @@
 import 'package:compare_that_price/widgets/camera_page.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import './widgets/welcome_screen.dart';
 //import './widgets/gallery.dart';
 //import './widgets/imageInput.dart';
@@ -36,37 +35,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _auth = FirebaseAuth.instance;
-  FirebaseUser loggedUser;
-  int _index = 1;
-  bool _logInPage = true;
-  bool _logOut = false;
 
   @override
   void initState() {
     super.initState();
-    getCurrentUser();
   }
 
-  void _setLogInOrCreatePage(bool isLogIn) {
-    setState(() {
-      getCurrentUser();
-      this._logInPage = isLogIn;
-    });
-  }
-
-  void getCurrentUser() async {
-    try {
-      final user = await _auth.currentUser();
-      if (user != null) {
-        _logOut = true;
-        loggedUser = user;
-        print(loggedUser.email);
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
