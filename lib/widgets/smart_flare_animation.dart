@@ -36,7 +36,7 @@ class _SmartFlareAnimationState extends State<SmartFlareAnimation>
   Future goToGallery() async {
     await new Future.delayed(const Duration(milliseconds: 100));
     Navigator.of(context).push(
-        new AppPageRoute(builder: (BuildContext context) => new ProductsList()));
+        new AppPageRoute(builder: (BuildContext context) => new ProductList()));
   }
 
   Future goToLogin() async {
