@@ -1,141 +1,70 @@
-//import 'dart:io';
-
 import 'package:flutter/material.dart';
-//import 'package:intl/intl.dart';
-
-import '../models/product.dart';
+import 'package:compare_that_price/models/product.dart';
 import 'smart_flare_animation.dart';
+import 'product_widget.dart';
 
-class ProductsList extends StatelessWidget {
-  static const String id = 'products_list';
-  final List<Product> _products = [
-    Product(
-        name: 'Tyskie',
-        image: 'assets/images/tyskie_jsne-500ml.jpg',
-        price: 2,
-        size: '500 ml'),
-    Product(
-        name: 'Budweiser',
-        image: 'assets/images/budweiser-can-440ml.jpg',
-        price: 2,
-        size: '440 ml'),
-    Product(
-        name: 'Corona Light',
-        image: 'assets/images/corona_light-335ml.jpg',
-        price: 2,
-        size: '335 ml'),
-    Product(
-        name: 'Heineken Original',
-        image: 'assets/images/heineken_original-330ml.jpg',
-        price: 2,
-        size: '330 ml'),
-    Product(
-        name: 'Rockshore',
-        image: 'assets/images/rockshore-can-500ml.jpg',
-        price: 2,
-        size: '500 ml'),
-    Product(
-        name: 'Hop House 13',
-        image: 'assets/images/hop_house_13-can-500ml.jpg',
-        price: 2,
-        size: '500 ml'),
-    Product(
-        name: 'Birra Moretti',
-        image: 'assets/images/birra_moretti-330ml.jpg',
-        price: 2,
-        size: '330 ml'),
+class ProductList extends StatefulWidget {
+  @override
+  _ProductListState createState() => _ProductListState();
+}
+
+class _ProductListState extends State<ProductList> with SingleTickerProviderStateMixin {
+
+  final List<Product> _listOfProducts = [
+    Product(name: 'Guinness', image: ('assets/images/guinness_can.jpg'),
+    price: '2€', description: 'Rich and creamy. Distinctive, Ruby Red colour. Velvety in its finish.'),
+    Product(name: 'Carlsberg', image: ('assets/images/carlsberg_can.jpg'),
+        price: '2€', description: 'Perfectly balanced Danish Pilsner, wonderfully crisp and refreshing, with a full flavour and a distinctive hoppy aroma.'),
+    Product(name: 'Heineken', image: ('assets/images/heineken_can.jpg'),
+        price: '2€', description: 'Available in over 192 countries globally, Heineken is Ireland’s most popular lager.'),
   ];
 
-  //ProductsList(this.products);
+  @override
+  void initState() {
+    
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white70,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(44),
         child: AppBar(
           centerTitle: true,
           title: Hero(
-            tag: 'title',
+            tag: 'app_title',
             child: Text(
               '~LABL~',
-              style: TextStyle(color: Colors.white70),
+              style: TextStyle(fontSize: 40, fontFamily: 'Acme', decoration: TextDecoration.none, color: Colors.white70),
             ),
           ),
           backgroundColor: Colors.amber,
           automaticallyImplyLeading: false,
         ),
       ),
-      body: Stack(
-        children: <Widget>[
-          ListView.builder(
-            itemBuilder: (ctx, index) {
-              return Card(
-                child: Row(
-                  children: [
-                    Container(
-                        height: 120,
-                        padding: EdgeInsets.all(10),
-                        child: Image.asset(_products[index].image)
-                        /* Image.asset(
-                  //'assets/images/emoticon-heart-4mp-free.png',
-                  _products[index].image,
-                  fit: BoxFit.cover, */
-                        ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          child: Text(
-                            _products[index].name,
-                            style: Theme.of(context).textTheme.title,
-                          ),
-                        ),
-                        Row(
-                          //mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              _products[index].size,
-                              style: TextStyle(
-                                color: Colors.grey,
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.symmetric(
-                                vertical: 10,
-                                horizontal: 15,
-                              ),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 2,
-                                ),
-                              ),
-                              padding: EdgeInsets.all(10),
-                              child: Text(
-                                '\$${_products[index].price.toStringAsFixed(2)}',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            },
-            itemCount: _products.length,
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: SmartFlareAnimation('navigate'),
-          )
-        ],
+      body: Container(
+        child: Stack(
+          children: <Widget>[
+            ListView.builder(itemBuilder: (_, int index)
+            => ProductCard(
+              this._listOfProducts[index]
+            ),
+              itemCount: this._listOfProducts.length,
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: SmartFlareAnimation('navigate'),
+            )
+          ],
+        )
       ),
     );
   }

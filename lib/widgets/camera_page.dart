@@ -76,10 +76,10 @@ class CameraScreenstate extends State<CameraPage> {
         child: AppBar(
           centerTitle: true,
           title: Hero(
-            tag: 'title',
+            tag: 'app_title',
             child: Text(
               '~LABL~',
-              style: TextStyle(color: Colors.white70),
+              style: TextStyle(fontSize: 40, fontFamily: 'Acme', decoration: TextDecoration.none, color: Colors.white70),
             ),
           ),
           backgroundColor: Colors.amber,
