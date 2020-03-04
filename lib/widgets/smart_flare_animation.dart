@@ -43,7 +43,7 @@ class _SmartFlareAnimationState extends State<SmartFlareAnimation>
     await new Future.delayed(const Duration(milliseconds: 100));
     Navigator.of(context).push(
         new AppPageRoute(builder: (BuildContext context) {
-          return _logInPage ? LogIn(_setLogInOrCreatePage) : CreateAccount(_setLogInOrCreatePage);
+          return  LogIn(_setLogInOrCreatePage);
         }));
   }
 
@@ -98,9 +98,9 @@ class _SmartFlareAnimationState extends State<SmartFlareAnimation>
               var localTouchPosition = (context.findRenderObject() as RenderBox)
                   .globalToLocal(tapInfo.globalPosition);
 
-              var topHalfTouched = localTouchPosition.dy < AnimationHeight / 3;
+              var topHalfTouched = localTouchPosition.dy < AnimationHeight / 2;
 
-              var leftSideTouched = localTouchPosition.dx < AnimationWidth / 2;
+              var leftSideTouched = localTouchPosition.dx < AnimationWidth / 3;
               var rightSideTouched = localTouchPosition.dx > (AnimationWidth / 3) * 2;
               var middleTouched = !leftSideTouched && !rightSideTouched;
 
