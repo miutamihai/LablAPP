@@ -14,7 +14,6 @@ class ShowMainInfo extends StatefulWidget {
 
 class _ShowMainInfoState extends State<ShowMainInfo>
     with SingleTickerProviderStateMixin {
-
   double maxTop = 500;
   double minTop = 0;
 
@@ -28,10 +27,9 @@ class _ShowMainInfoState extends State<ShowMainInfo>
         duration: const Duration(milliseconds: 200), vsync: this);
     animation = Tween<double>(begin: maxTop, end: minTop).animate(controller)
       ..addListener(() {
-        setState((){});
+        setState(() {});
       });
   }
-  
 
   final finalResponse;
 
@@ -44,7 +42,9 @@ class _ShowMainInfoState extends State<ShowMainInfo>
         mainAxisSize: MainAxisSize.min,
         children: List.generate(5, (index) {
           return Icon(
-            index < stars.roundToDouble().toInt() ? Icons.star : Icons.star_border,
+            index < stars.roundToDouble().toInt()
+                ? Icons.star
+                : Icons.star_border,
             color: Colors.deepOrange,
           );
         }),
@@ -64,7 +64,7 @@ class _ShowMainInfoState extends State<ShowMainInfo>
           ),
           Text(
             "$rating Stars",
-            style: TextStyle(fontSize: 35, color: themeColor),
+            style: TextStyle(fontSize: 35, color: Colors.amber, decoration: TextDecoration.none),
           )
         ],
       ),
@@ -76,41 +76,51 @@ class _ShowMainInfoState extends State<ShowMainInfo>
       itemCount: comments.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(
-          child: Column(
+          margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+          child: Stack(
             children: <Widget>[
-              Row(
-                children: <Widget>[
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(50),
-                    child: Image(
-                      image: comments[index].profileImage,
-                      height: 50,
-                      width: 50,
-                    ),
-                  ),
-                  RichText(
-                    text: TextSpan(children: [
-                      TextSpan(
-                        text: "${comments[index].username}",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 30,
-                            fontStyle: FontStyle.italic),
-                      ),
-                      TextSpan(text: "\n"),
-                      TextSpan(
-                        text: "${comments[index].comment}",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                        ),
-                      )
-                    ]),
-                  )
-                ],
+              Padding(
+                padding: EdgeInsets.only(top: 25),
+                child: CircleAvatar(
+                  minRadius: 30,
+                  maxRadius: 30,
+                  backgroundImage: comments[index].profileImage,
+                  backgroundColor: Colors.white70,
+                ),
               ),
-              Divider(
-                height: 20,
+              Padding(
+                padding: EdgeInsets.only(right: 10),
+                child: Card(
+                  margin: new EdgeInsets.fromLTRB(76.0, 16.0, 16.0, 16.0),
+                  elevation: 10,
+                  color: Colors.amberAccent,
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                      children: <Widget>[
+                        RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                              text: "${comments[index].username}",
+                              style: TextStyle(
+                                color: Colors.grey[800],
+                                fontSize: 30,
+                              ),
+                            ),
+                            TextSpan(text: "\n"),
+                            TextSpan(
+                              text: "${comments[index].comment}",
+                              style: TextStyle(
+                                color: Colors.grey[800],
+                                fontSize: 20,
+                              ),
+                            )
+                          ]),
+                        )
+                      ],
+                    ),
+                  )
+                ),
               )
             ],
           ),
@@ -139,29 +149,29 @@ class _ShowMainInfoState extends State<ShowMainInfo>
     String beerPrice = jsonString['price'];
 
     List<Comment> comments = [
-      Comment(AssetImage("assets/images/birra_moretti-330ml-4mp.jpg"), "User1",
+      Comment(AssetImage("assets/images/login_clipart.png"), "User1",
           "Nice Beer Bros"),
-      Comment(AssetImage("assets/images/birra_moretti-330ml-4mp.jpg"), "User2",
+      Comment(AssetImage("assets/images/login_clipart.png"), "User2",
           "I didn't like it"),
-      Comment(AssetImage("assets/images/birra_moretti-330ml-4mp.jpg"), "User3",
+      Comment(AssetImage("assets/images/login_clipart.png"), "User3",
           "Where can I buy it cheaper?"),
-      Comment(AssetImage("assets/images/birra_moretti-330ml-4mp.jpg"), "User1",
+      Comment(AssetImage("assets/images/login_clipart.png"), "User1",
           "Nice Beer Bros"),
-      Comment(AssetImage("assets/images/birra_moretti-330ml-4mp.jpg"), "User2",
+      Comment(AssetImage("assets/images/login_clipart.png"), "User2",
           "I didn't like it"),
-      Comment(AssetImage("assets/images/birra_moretti-330ml-4mp.jpg"), "User3",
+      Comment(AssetImage("assets/images/login_clipart.png"), "User3",
           "Where can I buy it cheaper?"),
-      Comment(AssetImage("assets/images/birra_moretti-330ml-4mp.jpg"), "User1",
+      Comment(AssetImage("assets/images/login_clipart.png"), "User1",
           "Nice Beer Bros"),
-      Comment(AssetImage("assets/images/birra_moretti-330ml-4mp.jpg"), "User2",
+      Comment(AssetImage("assets/images/login_clipart.png"), "User2",
           "I didn't like it"),
-      Comment(AssetImage("assets/images/birra_moretti-330ml-4mp.jpg"), "User3",
+      Comment(AssetImage("assets/images/login_clipart.png"), "User3",
           "Where can I buy it cheaper?"),
-      Comment(AssetImage("assets/images/birra_moretti-330ml-4mp.jpg"), "User1",
+      Comment(AssetImage("assets/images/login_clipart.png"), "User1",
           "Nice Beer Bros"),
-      Comment(AssetImage("assets/images/birra_moretti-330ml-4mp.jpg"), "User2",
+      Comment(AssetImage("assets/images/login_clipart.png"), "User2",
           "I didn't like it"),
-      Comment(AssetImage("assets/images/birra_moretti-330ml-4mp.jpg"), "User3",
+      Comment(AssetImage("assets/images/login_clipart.png"), "User3",
           "Where can I buy it cheaper?"),
     ];
 
@@ -169,7 +179,7 @@ class _ShowMainInfoState extends State<ShowMainInfo>
       top: animation.value,
       left: 0,
       child: GestureDetector(
-         onTap: () {
+        onTap: () {
           controller.isCompleted ? controller.reverse() : controller.forward();
         },
         child: Container(
@@ -181,20 +191,29 @@ class _ShowMainInfoState extends State<ShowMainInfo>
             _drawerHandler(),
             showStarsAndRating(Theme.of(context).primaryColor),
             Container(
-                color: Colors.grey[300],
+                color: Colors.amberAccent,
                 alignment: Alignment.center,
-                padding: EdgeInsets.symmetric(vertical: 30),
-                width: MediaQuery.of(context).size.width,
-                child: Text(
-                  "            $beerLabel's \n"+
-                  "Country average price is:\n"+
-                  "                   $beerPrice",
-                  style: TextStyle(fontSize: 25, fontStyle: FontStyle.italic),
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: Card(
+                    margin: new EdgeInsets.all(10),
+                    elevation: 10,
+                    color: Colors.amberAccent[600],
+                  child: Text(
+                    "Ireland's average price for a $beerLabel is $beerPrice",
+                    style: TextStyle(
+                        decoration: TextDecoration.none,
+                        fontSize: 18
+                    ),
+                  )
                 )),
             Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                child: _createCommentsView(comments))
+              alignment: Alignment.center,
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: Align(
+                  alignment: Alignment.center,
+                  child: _createCommentsView(comments)),
+            )
           ]),
         ),
       ),
