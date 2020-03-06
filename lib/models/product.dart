@@ -14,5 +14,6 @@ class Product {
     this.price,
     this.description,
     this.reviews
+
   });
 }

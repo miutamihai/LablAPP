@@ -11,7 +11,11 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
+<<<<<<< HEAD
 	<string>labl_app</string>
+=======
+	<string>compare_that_price</string>
+>>>>>>> bf82252628b2d9cc3a5247d7ca9b165d2404eef6
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

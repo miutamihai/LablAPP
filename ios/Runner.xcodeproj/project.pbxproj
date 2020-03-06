@@ -14,6 +14,10 @@
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		9705A1C61CF904A100538489 /* Flutter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9740EEBA1CF902C7004384FC /* Flutter.framework */; };
 		9705A1C71CF904A300538489 /* Flutter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9740EEBA1CF902C7004384FC /* Flutter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+<<<<<<< HEAD
+=======
+		9740EEB41CF90195004384FC /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9740EEB21CF90195004384FC /* Debug.xcconfig */; };
+>>>>>>> bf82252628b2d9cc3a5247d7ca9b165d2404eef6
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
@@ -148,16 +152,28 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1020;
+<<<<<<< HEAD
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					97C146ED1CF9000F007C117D = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 1100;
+=======
+				ORGANIZATIONNAME = "The Chromium Authors";
+				TargetAttributes = {
+					97C146ED1CF9000F007C117D = {
+						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0910;
+>>>>>>> bf82252628b2d9cc3a5247d7ca9b165d2404eef6
 					};
 				};
 			};
 			buildConfigurationList = 97C146E91CF9000F007C117D /* Build configuration list for PBXProject "Runner" */;
+<<<<<<< HEAD
 			compatibilityVersion = "Xcode 9.3";
+=======
+			compatibilityVersion = "Xcode 3.2";
+>>>>>>> bf82252628b2d9cc3a5247d7ca9b165d2404eef6
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -181,6 +197,10 @@
 			files = (
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
+<<<<<<< HEAD
+=======
+				9740EEB41CF90195004384FC /* Debug.xcconfig in Resources */,
+>>>>>>> bf82252628b2d9cc3a5247d7ca9b165d2404eef6
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
 			);
@@ -296,7 +316,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+<<<<<<< HEAD
 				SUPPORTED_PLATFORMS = iphoneos;
+=======
+>>>>>>> bf82252628b2d9cc3a5247d7ca9b165d2404eef6
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -320,10 +343,17 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = com.mihaimiuta.lablApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.compareThatPrice;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
+>>>>>>> bf82252628b2d9cc3a5247d7ca9b165d2404eef6
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Profile;
@@ -429,7 +459,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+<<<<<<< HEAD
 				SUPPORTED_PLATFORMS = iphoneos;
+=======
+>>>>>>> bf82252628b2d9cc3a5247d7ca9b165d2404eef6
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -454,11 +487,19 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = com.mihaimiuta.lablApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.compareThatPrice;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+>>>>>>> bf82252628b2d9cc3a5247d7ca9b165d2404eef6
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -481,10 +522,17 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = com.mihaimiuta.lablApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.compareThatPrice;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
+>>>>>>> bf82252628b2d9cc3a5247d7ca9b165d2404eef6
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -513,6 +561,10 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+<<<<<<< HEAD
+=======
+
+>>>>>>> bf82252628b2d9cc3a5247d7ca9b165d2404eef6
 	};
 	rootObject = 97C146E61CF9000F007C117D /* Project object */;
 }
