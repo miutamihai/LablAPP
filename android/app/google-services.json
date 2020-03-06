@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "664450505327",
+    "firebase_url": "https://lablappdatabase.firebaseio.com",
+    "project_id": "lablappdatabase",
+    "storage_bucket": "lablappdatabase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664450505327:android:5ce1e842306c8439da8b9a",
+        "android_client_info": {
+          "package_name": "com.example.compare_that_price"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664450505327-ijehkjdvtjho6981o3m6o1ggf240alnc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBy2Ep1Zurc1A2zA7uJzN8FQeS_EcWZD5U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664450505327-ijehkjdvtjho6981o3m6o1ggf240alnc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664450505327:android:8c1f639a4a369ad0da8b9a",
+        "android_client_info": {
+          "package_name": "com.mihaimiuta.animation_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664450505327-ijehkjdvtjho6981o3m6o1ggf240alnc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBy2Ep1Zurc1A2zA7uJzN8FQeS_EcWZD5U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664450505327-ijehkjdvtjho6981o3m6o1ggf240alnc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664450505327:android:00686508bbdb2013da8b9a",
+        "android_client_info": {
+          "package_name": "com.mihaimiuta.labl_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664450505327-ijehkjdvtjho6981o3m6o1ggf240alnc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBy2Ep1Zurc1A2zA7uJzN8FQeS_EcWZD5U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664450505327-ijehkjdvtjho6981o3m6o1ggf240alnc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
