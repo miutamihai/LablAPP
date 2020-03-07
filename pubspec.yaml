@@ -41,6 +41,7 @@ dependencies:
   cloud_firestore: any
   firebase_storage: any
   slimy_card: ^1.0.1
+  property_change_notifier: any
 
 dev_dependencies:
   flutter_test:
@@ -91,3 +92,8 @@ flutter:
         - asset: fonts/Acme-Regular.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+analyzer:
+  strong-mode: true
+  language:
+    enableSuperMixins: true

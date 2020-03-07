@@ -37,7 +37,6 @@ class ShowResult extends StatelessWidget {
             FittedBox(
           fit: BoxFit.fitHeight,
           child: Image.file(image),
-                //image //TODO: This should be the final implementation
         ) // test purposes
         );
   }

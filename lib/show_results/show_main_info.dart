@@ -23,30 +23,20 @@ class _ShowMainInfoState extends State<ShowMainInfo>
   DocumentSnapshot firebase;
   DocumentReference _document;
   List<Comment> comments = [
-    Comment(AssetImage("assets/images/login_clipart.png"), "User1",
+    Comment('', "User1",
         "Nice Beer Bros"),
-    Comment(AssetImage("assets/images/login_clipart.png"), "User2",
+    Comment('', "User2",
         "I didn't like it"),
-    Comment(AssetImage("assets/images/login_clipart.png"), "User3",
+    Comment('', "User3",
         "Where can I buy it cheaper?"),
-    Comment(AssetImage("assets/images/login_clipart.png"), "User1",
+    Comment('', "User1",
         "Nice Beer Bros"),
-    Comment(AssetImage("assets/images/login_clipart.png"), "User2",
+    Comment('', "User2",
         "I didn't like it"),
-    Comment(AssetImage("assets/images/login_clipart.png"), "User3",
+    Comment('', "User3",
         "Where can I buy it cheaper?"),
-    Comment(AssetImage("assets/images/login_clipart.png"), "User1",
+    Comment('', "User1",
         "Nice Beer Bros"),
-    Comment(AssetImage("assets/images/login_clipart.png"), "User2",
-        "I didn't like it"),
-    Comment(AssetImage("assets/images/login_clipart.png"), "User3",
-        "Where can I buy it cheaper?"),
-    Comment(AssetImage("assets/images/login_clipart.png"), "User1",
-        "Nice Beer Bros"),
-    Comment(AssetImage("assets/images/login_clipart.png"), "User2",
-        "I didn't like it"),
-    Comment(AssetImage("assets/images/login_clipart.png"), "User3",
-        "Where can I buy it cheaper?"),
   ];
   Animation<double> animation;
   AnimationController controller;
@@ -56,12 +46,9 @@ class _ShowMainInfoState extends State<ShowMainInfo>
       setState(() {
         rating = value['Average rating'].toDouble();
         print('added rating');
-        Firestore.instance.collection('Beers').document(beerLabel).snapshots().asyncMap((snap) async {
-          setState(() {
-            comments = snap.data['Comments'];
-            print(comments.first);
-          });
-        });
+        comments = List<Comment>.from(value['Comments'].map(
+            (d) => Comment.fromMap(d)
+        ));
       });
     });
   }
@@ -82,8 +69,23 @@ class _ShowMainInfoState extends State<ShowMainInfo>
     getComments();
     super.initState();
   }
+  
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   final finalResponse;
+
+  final headerTextStyle = TextStyle(
+      color: Colors.grey[800], fontSize: 18.0, fontWeight: FontWeight.w600);
+
+  final regularTextStyle = TextStyle(
+      color: Colors.grey[800], fontSize: 10, fontWeight: FontWeight.w400);
+
+  final subHeaderTextStyle = TextStyle(
+      fontSize: 12.0, color: Colors.grey[800], fontWeight: FontWeight.w400);
+
 
   _ShowMainInfoState(this.finalResponse);
 
@@ -123,10 +125,18 @@ class _ShowMainInfoState extends State<ShowMainInfo>
     );
   }
 
+  void _listener() {
+    setState(() {
+      print('profile picture changed');
+    });
+  }
+
+
   _createCommentsView() {
     return ListView.builder(
       itemCount: comments.length,
       itemBuilder: (BuildContext context, int index) {
+        comments[index].addListener(_listener, ['profile image arrived']);
         return Container(
           margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
           child: Stack(
@@ -136,7 +146,7 @@ class _ShowMainInfoState extends State<ShowMainInfo>
                 child: CircleAvatar(
                   minRadius: 30,
                   maxRadius: 30,
-                  backgroundImage: comments[index].profileImage,
+                  backgroundImage: NetworkImage(comments[index].profileImage),
                   backgroundColor: Colors.white70,
                 ),
               ),
