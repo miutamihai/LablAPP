@@ -7,23 +7,24 @@ import 'nav_bar/tab_bar.dart';
 import 'nav_bar/tab_item_icon.dart';
 
 class BaseWidget extends StatefulWidget {
-  final String pageToLoadId;
+  final int selectedIndex;
 
-  const BaseWidget(this.pageToLoadId);
+  const BaseWidget(this.selectedIndex);
   @override
-  _BaseWidgetState createState() => _BaseWidgetState(pageToLoadId);
+  _BaseWidgetState createState() => _BaseWidgetState(selectedIndex);
 }
 
 class _BaseWidgetState extends State<BaseWidget>
     with SingleTickerProviderStateMixin {
+  final GlobalKey<CameraScreenstate> _cameraKey = GlobalKey<CameraScreenstate>();
+  Widget _cameraPage;
+  Widget _galleryPage;
+  Widget _accountPage;
   AnimationController _controller;
-  String pageToLoadID;
-  _BaseWidgetState(String ID) {
-    this.pageToLoadID = ID;
-    print(pageToLoadID);
-  }
-
   int selectedIndex = 2;
+  _BaseWidgetState(int ID) {
+    this.selectedIndex = ID;
+  }
 
   final iconList = [
     TabItemIcon(
@@ -40,13 +41,18 @@ class _BaseWidgetState extends State<BaseWidget>
     ),
   ];
   void onChangeTab(int index) {
+    if(selectedIndex == index && index == 2){
+      _cameraKey.currentState.onCapturePressed();
+    }
     selectedIndex = index;
   }
 
   @override
   void initState() {
     _controller = AnimationController(vsync: this);
-    print(pageToLoadID);
+    _cameraPage = CameraPage(key: _cameraKey,);
+    _galleryPage = ProductList();
+    _accountPage  = LogIn();
     super.initState();
   }
 
@@ -61,10 +67,30 @@ class _BaseWidgetState extends State<BaseWidget>
     return DefaultTabController(
       length: iconList.length,
       child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(44),
+          child: AppBar(
+            centerTitle: true,
+            title: Hero(
+              tag: 'app_title',
+              child: Text(
+                '~LABL~',
+                style: TextStyle(fontSize: 40, fontFamily: 'Acme', decoration: TextDecoration.none, color: Colors.white70),
+              ),
+            ),
+            backgroundColor: Colors.amber,
+            automaticallyImplyLeading: false,
+          ),
+        ),
         body: TabBarView(
-          children: <Widget>[ProductList(), CameraPage(), LogIn()],
+          children: <Widget>[
+            _galleryPage,
+            _cameraPage,
+            _accountPage
+          ],
         ),
         bottomNavigationBar: JumpingTabBar(
+          duration: Duration(seconds: 1),
           onChangeTab: onChangeTab,
           circleGradient: LinearGradient(
             colors: [

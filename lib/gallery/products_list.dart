@@ -45,25 +45,6 @@ class _ProductListState extends State<ProductList>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white70,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(44),
-        child: AppBar(
-          centerTitle: true,
-          title: Hero(
-            tag: 'app_title',
-            child: Text(
-              '~LABL~',
-              style: TextStyle(
-                  fontSize: 40,
-                  fontFamily: 'Acme',
-                  decoration: TextDecoration.none,
-                  color: Colors.white70),
-            ),
-          ),
-          backgroundColor: Colors.amber,
-          automaticallyImplyLeading: false,
-        ),
-      ),
       body: Stack(
         children: <Widget>[
           ListView.builder(

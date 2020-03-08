@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flare_flutter/flare_controls.dart';
-import 'camera_page.dart';
+import 'package:labl_app/navigation/base_widget.dart';
 import 'package:labl_app/navigation/custom_app_router.dart';
 import '../show_results/show_results.dart';
 
@@ -21,7 +21,7 @@ class _AcceptOrRepeatState extends State<AcceptOrRepeat> with SingleTickerProvid
   Future goToCamera() async {
     await new Future.delayed(const Duration(milliseconds: 100));
     Navigator.of(context).push(
-        new AppPageRoute(builder: (BuildContext context) => new CameraPage()));
+        new AppPageRoute(builder: (BuildContext context) => BaseWidget(2)));
   }
 
   final FlareControls animationControls = FlareControls();

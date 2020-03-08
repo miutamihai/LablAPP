@@ -9,22 +9,26 @@ import 'package:camera/camera.dart';
 
 class CameraPage extends StatefulWidget {
   static const String id = 'home';
+  CameraPage({Key key}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
     return CameraScreenstate();
   }
 }
 
-class CameraScreenstate extends State<CameraPage> {
+class CameraScreenstate extends State<CameraPage> with AutomaticKeepAliveClientMixin<CameraPage>{
   CameraController controller;
   List cameras;
   int selectedCameraIdx;
   String imagePath;
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   void initState() {
     super.initState();
-
+    print('init state called');
     // Get the list of available cameras.
     // Then set the first camera as selected.
     availableCameras().then((availableCameras) {
@@ -70,21 +74,6 @@ class CameraScreenstate extends State<CameraPage> {
     }
 
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(44),
-        child: AppBar(
-          centerTitle: true,
-          title: Hero(
-            tag: 'app_title',
-            child: Text(
-              '~LABL~',
-              style: TextStyle(fontSize: 40, fontFamily: 'Acme', decoration: TextDecoration.none, color: Colors.white70),
-            ),
-          ),
-          backgroundColor: Colors.amber,
-          automaticallyImplyLeading: false,
-        ),
-      ),
       body: CameraPreview(controller),
     );
   }
@@ -158,7 +147,7 @@ class CameraScreenstate extends State<CameraPage> {
     return filePath;
   }
 
-  void _onCapturePressed() {
+  void onCapturePressed() {
     _takePicture().then((filePath) {
       if (mounted) {
         setState(() {
@@ -188,6 +177,6 @@ class CameraScreenstate extends State<CameraPage> {
   bool onCameraTap(TakePictureNotification notification) {
     if (controller != null &&
         controller.value.isInitialized &&
-        notification.title == 'take picture') _onCapturePressed();
+        notification.title == 'take picture') onCapturePressed();
   }
 }
