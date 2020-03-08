@@ -38,14 +38,20 @@ dependencies:
   circular_reveal_animation: ^1.1.5
   animated_text_kit: ^2.0.0
   unique_id: ^0.0.2
-  cloud_firestore: any
+  cloud_firestore: ^0.13.4+1
   firebase_storage: any
   slimy_card: ^1.0.1
   property_change_notifier: any
+  flutter_launcher_icons: any
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/AppLogo.jpg"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

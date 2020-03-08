@@ -43,7 +43,6 @@ class ShowResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return FutureBuilder<String>(
         future: sendImage(image),
         builder: (BuildContext context, AsyncSnapshot<String> snapshot){

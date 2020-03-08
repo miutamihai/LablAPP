@@ -8,41 +8,47 @@ import 'beer_description.dart';
 class ProductCard extends StatefulWidget {
   final Product product;
 
-
   const ProductCard(this.product);
   @override
   _ProductCardState createState() => _ProductCardState(this.product);
 }
 
-class _ProductCardState extends State<ProductCard> with SingleTickerProviderStateMixin {
+class _ProductCardState extends State<ProductCard>
+    with SingleTickerProviderStateMixin {
   AnimationController _controller;
   DocumentSnapshot firebase;
   DocumentReference _document;
+  Widget beerDescription;
   Product product;
-  String image = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.iconfinder.com%2Ficons%2F3273769%2Fempty_image_picture_placeholder_icon&psig=AOvVaw2uSARERdJv82tA4y2fZjjp&ust=1583538146682000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMifqbnBhOgCFQAAAAAdAAAAABAD';
-  _ProductCardState(product){
+  String image =
+      'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.iconfinder.com%2Ficons%2F3273769%2Fempty_image_picture_placeholder_icon&psig=AOvVaw2uSARERdJv82tA4y2fZjjp&ust=1583538146682000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMifqbnBhOgCFQAAAAAdAAAAABAD';
+  _ProductCardState(product) {
     this.product = product;
   }
 
   Future<void> loadImageFromStorage() async {
-    await FirebaseStorage.instance.ref().child(product.image).getDownloadURL().then((value){
+    await FirebaseStorage.instance
+        .ref()
+        .child(product.image)
+        .getDownloadURL()
+        .then((value) {
       print('await done');
       setState(() {
         image = value.toString();
         print(image);
+        beerDescription = BeerDescription(_document, product.name, image);
       });
     });
   }
 
   Future<void> getBeerReview() async {
-    await _document.get().then((value){
+    await _document.get().then((value) {
       setState(() {
         print('got beer reviews');
         product.reviews = value['Average rating'].toString();
       });
     });
   }
-
 
   final headerTextStyle = TextStyle(
       color: Colors.grey[800], fontSize: 18.0, fontWeight: FontWeight.w600);
@@ -59,6 +65,7 @@ class _ProductCardState extends State<ProductCard> with SingleTickerProviderStat
     loadImageFromStorage();
     _document = Firestore.instance.collection('Beers').document(product.name);
     getBeerReview();
+    beerDescription = BeerDescription(_document, product.name, product.image);
     super.initState();
   }
 
@@ -89,7 +96,8 @@ class _ProductCardState extends State<ProductCard> with SingleTickerProviderStat
         shape: BoxShape.rectangle,
         borderRadius: new BorderRadius.circular(8.0),
         boxShadow: <BoxShadow>[
-          new BoxShadow(color: Colors.black,
+          new BoxShadow(
+              color: Colors.black,
               blurRadius: 10.0,
               offset: new Offset(0.0, 10.0))
         ],
@@ -105,19 +113,20 @@ class _ProductCardState extends State<ProductCard> with SingleTickerProviderStat
                 color: Colors.amber[50],
                 width: 24.0,
                 height: 1.0,
-                margin: const EdgeInsets.symmetric(vertical: 8.0)
-            ),
+                margin: const EdgeInsets.symmetric(vertical: 8.0)),
             new Row(
               children: <Widget>[
-                new Icon(Icons.attach_money, size: 30,
-                    color: Colors.amber),
-                new Text(
-                    product.price, style: headerTextStyle),
+                new Icon(Icons.attach_money, size: 30, color: Colors.amber),
+                new Text(product.price, style: headerTextStyle),
                 new Container(width: 10),
-                new Icon(Icons.favorite, size: 30,
-                  color: Colors.amber,),
+                new Icon(
+                  Icons.favorite,
+                  size: 30,
+                  color: Colors.amber,
+                ),
                 new Text(
-                    product.reviews, style: headerTextStyle,
+                  product.reviews,
+                  style: headerTextStyle,
                 )
               ],
             )
@@ -132,13 +141,11 @@ class _ProductCardState extends State<ProductCard> with SingleTickerProviderStat
       topCardWidget: Container(
         height: 150,
         child: Stack(
-          children: <Widget>[
-            beerCard,
-            beerThumbnail
-          ],
+          children: <Widget>[beerCard, beerThumbnail],
         ),
       ),
-      bottomCardWidget: BeerDescription(_document)
+      bottomCardWidget: beerDescription,
+      bottomCardHeight: 200,
     );
   }
 }

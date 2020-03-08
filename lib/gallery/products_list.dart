@@ -64,16 +64,15 @@ class _ProductListState extends State<ProductList>
           automaticallyImplyLeading: false,
         ),
       ),
-      body: Container(
-          child: Stack(
+      body: Stack(
         children: <Widget>[
           ListView.builder(
             itemBuilder: (_, int index) => Padding(
               padding: EdgeInsets.symmetric(vertical: 20),
               child: index == this._listOfProducts.length
                   ? Container(
-                      height: 100,
-                    )
+                height: 100,
+              )
                   : ProductCard(this._listOfProducts[index]),
             ),
             itemCount: this._listOfProducts.length + 1,
@@ -83,7 +82,7 @@ class _ProductListState extends State<ProductList>
             child: SmartFlareAnimation('navigate'),
           )
         ],
-      )),
+      )
     );
   }
 }

@@ -55,6 +55,7 @@ class _ShowMainInfoState extends State<ShowMainInfo>
 
   @override
   void initState() {
+    print(finalResponse);
     var jsonString = jsonDecode(finalResponse);
 
     beerLabel = jsonString['label'];
@@ -77,16 +78,6 @@ class _ShowMainInfoState extends State<ShowMainInfo>
 
   final finalResponse;
 
-  final headerTextStyle = TextStyle(
-      color: Colors.grey[800], fontSize: 18.0, fontWeight: FontWeight.w600);
-
-  final regularTextStyle = TextStyle(
-      color: Colors.grey[800], fontSize: 10, fontWeight: FontWeight.w400);
-
-  final subHeaderTextStyle = TextStyle(
-      fontSize: 12.0, color: Colors.grey[800], fontWeight: FontWeight.w400);
-
-
   _ShowMainInfoState(this.finalResponse);
 
   Widget getStars(double stars) {
@@ -100,6 +91,7 @@ class _ShowMainInfoState extends State<ShowMainInfo>
                 ? Icons.star
                 : Icons.star_border,
             color: Colors.deepOrange,
+            size: 45,
           );
         }),
       ),
@@ -112,14 +104,14 @@ class _ShowMainInfoState extends State<ShowMainInfo>
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          getStars(rating),
           Container(
             width: 10,
           ),
           Text(
             "$rating Stars",
-            style: TextStyle(fontSize: 35, color: Colors.amber, decoration: TextDecoration.none),
-          )
+            style: TextStyle(fontSize: 35, color: Colors.grey[800], decoration: TextDecoration.none, fontFamily: 'Acme'),
+          ),
+          getStars(rating),
         ],
       ),
     );
@@ -138,11 +130,22 @@ class _ShowMainInfoState extends State<ShowMainInfo>
       itemBuilder: (BuildContext context, int index) {
         comments[index].addListener(_listener, ['profile image arrived']);
         return Container(
+          decoration: BoxDecoration(
+            color: Colors.amber[300],
+            shape: BoxShape.rectangle,
+            borderRadius: new BorderRadius.circular(40),
+            boxShadow: <BoxShadow>[
+              new BoxShadow(color: Colors.black,
+                  blurRadius: 10.0,
+                  offset: new Offset(0.0, 10.0))
+            ],
+          ),
           margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
           child: Stack(
+            fit: StackFit.loose,
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(top: 25),
+                padding: EdgeInsets.only(top: 25, left: 25),
                 child: CircleAvatar(
                   minRadius: 30,
                   maxRadius: 30,
@@ -151,11 +154,11 @@ class _ShowMainInfoState extends State<ShowMainInfo>
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(right: 10),
+                padding: EdgeInsets.only(right: 10, left: 30),
                 child: Card(
                   margin: new EdgeInsets.fromLTRB(76.0, 16.0, 16.0, 16.0),
                   elevation: 10,
-                  color: Colors.amberAccent,
+                  color: Colors.amber[50],
                   child: Padding(
                     padding: EdgeInsets.all(10),
                     child: Column(
@@ -163,10 +166,11 @@ class _ShowMainInfoState extends State<ShowMainInfo>
                         RichText(
                           text: TextSpan(children: [
                             TextSpan(
-                              text: "${comments[index].username}",
+                              text: "${comments[index].username}" + " " + "${comments[index].madeIn}",
                               style: TextStyle(
                                 color: Colors.grey[800],
                                 fontSize: 30,
+                                fontFamily: 'Acme'
                               ),
                             ),
                             TextSpan(text: "\n"),
@@ -175,6 +179,7 @@ class _ShowMainInfoState extends State<ShowMainInfo>
                               style: TextStyle(
                                 color: Colors.grey[800],
                                 fontSize: 20,
+                                fontFamily: 'Acme'
                               ),
                             )
                           ]),
@@ -226,8 +231,8 @@ class _ShowMainInfoState extends State<ShowMainInfo>
                 child: Card(
                     margin: new EdgeInsets.all(10),
                     elevation: 10,
-                    color: Colors.amberAccent[600],
-                  child: Text(
+                    color: Colors.amber[50],
+                    child: Text(
                     "Ireland's average price for a $beerLabel is $beerPrice",
                     style: TextStyle(
                         decoration: TextDecoration.none,

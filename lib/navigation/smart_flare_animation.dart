@@ -21,10 +21,6 @@ class SmartFlareAnimation extends StatefulWidget {
 
 class _SmartFlareAnimationState extends State<SmartFlareAnimation>
     with SingleTickerProviderStateMixin {
-  final _auth = FirebaseAuth.instance;
-  FirebaseUser loggedUser;
-  bool _logInPage = true;
-  bool _logOut = false;
 
   Future goToCamera() async {
     await new Future.delayed(const Duration(milliseconds: 100));
@@ -42,29 +38,8 @@ class _SmartFlareAnimationState extends State<SmartFlareAnimation>
     await new Future.delayed(const Duration(milliseconds: 100));
     Navigator.of(context).push(
         new AppPageRoute(builder: (BuildContext context) {
-          return  LogIn(_setLogInOrCreatePage);
+          return  LogIn();
         }));
-  }
-
-
-  void _setLogInOrCreatePage(bool isLogIn) {
-    setState(() {
-      getCurrentUser();
-      this._logInPage = isLogIn;
-    });
-  }
-
-  void getCurrentUser() async {
-    try {
-      final user = await _auth.currentUser();
-      if (user != null) {
-        _logOut = true;
-        loggedUser = user;
-        print(loggedUser.email);
-      }
-    } catch (e) {
-      print(e);
-    }
   }
 
 
@@ -98,23 +73,29 @@ class _SmartFlareAnimationState extends State<SmartFlareAnimation>
                   .globalToLocal(tapInfo.globalPosition);
 
               var topHalfTouched = localTouchPosition.dy < AnimationHeight / 2;
-
               var leftSideTouched = localTouchPosition.dx < AnimationWidth / 3;
               var rightSideTouched = localTouchPosition.dx > (AnimationWidth / 3) * 2;
               var middleTouched = !leftSideTouched && !rightSideTouched;
 
-              if (middleTouched && topHalfTouched) {
-                _setAnimationToPlay(AnimationToPlay.PulseTapped);
-                if(!shouldTakePicture){
-                  goToCamera();
+              if(topHalfTouched){
+                if (middleTouched) {
+                  _setAnimationToPlay(AnimationToPlay.PulseTapped);
+                  if(!shouldTakePicture && isOpen){
+                    goToCamera();
+                  }
+                } else if (leftSideTouched) {
+                  if(isOpen){
+                    _setAnimationToPlay(AnimationToPlay.CameraTapped);
+                    goToGallery();
+                  }
+                }else if(rightSideTouched){
+                  if(isOpen){
+                    _setAnimationToPlay(AnimationToPlay.ImageTapped);
+                    goToLogin();
+                  }
                 }
-              } else if (leftSideTouched && topHalfTouched) {
-                _setAnimationToPlay(AnimationToPlay.CameraTapped);
-                goToGallery();
-              }else if(rightSideTouched && topHalfTouched){
-                _setAnimationToPlay(AnimationToPlay.ImageTapped);
-                goToLogin();
-              }else if (isOpen) {
+              }
+              else if (isOpen) {
                 _setAnimationToPlay(AnimationToPlay.Deactivate);
               } else
                 _setAnimationToPlay(AnimationToPlay.Activate);

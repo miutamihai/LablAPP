@@ -24,7 +24,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> with TickerProviderStateM
   String _logoAnimation;
 
   Future goToHeroPage() async {
-    await new Future.delayed(const Duration(milliseconds: 3000));
+    await new Future.delayed(const Duration(milliseconds: 1000));
     Navigator.of(context).push(
         new AppPageRoute(builder: (BuildContext context) => new CameraPage()));
   }
