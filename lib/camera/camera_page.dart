@@ -6,10 +6,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'package:labl_app/navigation/smart_flare_animation.dart';
 
 class CameraPage extends StatefulWidget {
-  static const String id = 'camera_page';
+  static const String id = 'home';
   @override
   State<StatefulWidget> createState() {
     return CameraScreenstate();
@@ -86,28 +85,7 @@ class CameraScreenstate extends State<CameraPage> {
           automaticallyImplyLeading: false,
         ),
       ),
-      body: AspectRatio(
-          aspectRatio: controller.value.aspectRatio,
-          child: Stack(
-            children: <Widget>[
-              CameraPreview(controller),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: NotificationListener<TakePictureNotification>(
-                    onNotification: onCameraTap,
-                    child: GestureDetector(
-                      onTap: () {
-                        if (SmartFlareAnimation.of(context).shouldTakePicture &&
-                            controller != null &&
-                            controller.value.isInitialized) {
-                          _onCapturePressed();
-                        }
-                      },
-                      child: SmartFlareAnimation('take picture'),
-                    )),
-              )
-            ],
-          )),
+      body: CameraPreview(controller),
     );
   }
 

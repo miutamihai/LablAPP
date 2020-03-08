@@ -1,3 +1,5 @@
 analyzer:
+  enable-experiment:
+    - control-flow-collections
   errors:
     mixin_inherits_from_not_object: ignore

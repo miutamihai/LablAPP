@@ -29,7 +29,7 @@ class _AcceptOrRepeatState extends State<AcceptOrRepeat> with SingleTickerProvid
   final image;
 
 
-  AnimationToPlay _animationToPlay = AnimationToPlay.Deactivate;
+  AnimationToPlay _animationToPlay = AnimationToPlay.Activate;
   AnimationToPlay _lastAnimationPlayed;
 
   static const double AnimationWidth = 295.0;

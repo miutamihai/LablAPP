@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:labl_app/gallery/product_widget.dart';
-import 'package:labl_app/navigation/smart_flare_animation.dart';
 import 'package:labl_app/models/product.dart';
 
 class ProductList extends StatefulWidget {
+  static const String id = 'gallery';
   @override
   _ProductListState createState() => _ProductListState();
 }
@@ -77,10 +77,6 @@ class _ProductListState extends State<ProductList>
             ),
             itemCount: this._listOfProducts.length + 1,
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: SmartFlareAnimation('navigate'),
-          )
         ],
       )
     );

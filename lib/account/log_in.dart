@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flare_flutter/flare_actor.dart';
-import 'package:labl_app/navigation/smart_flare_animation.dart';
 import 'package:flutter/painting.dart';
 import 'login_form_fields.dart';
 
 
 class LogIn extends StatefulWidget {
-  static const String id = 'log_in';
+  static const String id = 'account';
 
   LogIn();
 
@@ -100,13 +99,6 @@ class _LogInState extends State<LogIn> {
                       ),
                     ),
                   ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: 10),
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: SmartFlareAnimation('navigate'),
                 ),
               ),
             ],

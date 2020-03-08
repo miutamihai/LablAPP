@@ -1,4 +1,4 @@
-import 'package:labl_app/camera/camera_page.dart';
+import 'package:labl_app/navigation/base_widget.dart';
 import 'package:dashed_circle/dashed_circle.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +26,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> with TickerProviderStateM
   Future goToHeroPage() async {
     await new Future.delayed(const Duration(milliseconds: 1000));
     Navigator.of(context).push(
-        new AppPageRoute(builder: (BuildContext context) => new CameraPage()));
+        new AppPageRoute(builder: (BuildContext context) => new BaseWidget('home')));
   }
 
   @override
