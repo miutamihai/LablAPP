@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'custom_app_router.dart';
 import 'package:labl_app/camera/camera_page.dart';
 import 'package:labl_app/gallery/products_list.dart';
 import 'package:labl_app/account/log_in.dart';

@@ -19,9 +19,9 @@ class _AcceptOrRepeatState extends State<AcceptOrRepeat> with SingleTickerProvid
   _AcceptOrRepeatState(this.image);
 
   Future goToCamera() async {
-    await new Future.delayed(const Duration(milliseconds: 100));
+    //await new Future.delayed(const Duration(milliseconds: 100));
     Navigator.of(context).push(
-        new AppPageRoute(builder: (BuildContext context) => BaseWidget(2)));
+        new AppPageRoute(shouldGoToTheRight: false, builder: (BuildContext context) => BaseWidget(2)));
   }
 
   final FlareControls animationControls = FlareControls();

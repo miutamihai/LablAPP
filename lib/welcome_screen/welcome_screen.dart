@@ -26,7 +26,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> with TickerProviderStateM
   Future goToHeroPage() async {
     await new Future.delayed(const Duration(milliseconds: 1000));
     Navigator.of(context).push(
-        new AppPageRoute(builder: (BuildContext context) => new BaseWidget(2)));
+        new AppPageRoute(shouldGoToTheRight: true ,builder: (BuildContext context) => new BaseWidget(2)));
   }
 
   @override

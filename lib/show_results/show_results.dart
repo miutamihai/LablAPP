@@ -4,6 +4,8 @@ import 'dart:async';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'loading_screen.dart';
+import 'package:labl_app/navigation/custom_app_router.dart';
+import 'package:labl_app/navigation/base_widget.dart';
 
 class ShowResult extends StatelessWidget {
   final image;
@@ -34,32 +36,49 @@ class ShowResult extends StatelessWidget {
         height: mediaQueryData.size.height,
         width: mediaQueryData.size.width,
         child: //Image.asset(image),
-            FittedBox(
+        FittedBox(
           fit: BoxFit.fitHeight,
           child: Image.file(image),
         ) // test purposes
-        );
+    );
   }
+
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<String>(
-        future: sendImage(image),
-        builder: (BuildContext context, AsyncSnapshot<String> snapshot){
-            if(snapshot.connectionState == ConnectionState.waiting){
-              return Loader();
-            }
-            else
-              return SafeArea(
-                child: Stack(children: <Widget>[
-                  showImage(MediaQuery.of(context)),
-                  ShowMainInfo(snapshot.data),
-                ]),
-              );
-        },
+      future: sendImage(image),
+      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Loader();
+        } else
+          return  Stack(children: <Widget>[
+            showImage(MediaQuery.of(context)),
+            ShowMainInfo(snapshot.data),
+            Positioned(
+              top: 40,
+              left: 40,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(new AppPageRoute(
+                      shouldGoToTheRight: false,
+                      builder: (BuildContext context) =>
+                      new BaseWidget(2)));
+                },
+                child: CircleAvatar(
+                  radius: 40,
+                  backgroundColor: Colors.amberAccent,
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white70,
+                    size: 50,
+                  ),
+                ),
+              ),
+            )
+          ],
+          );
+      },
     );
-
-
   }
 }
-

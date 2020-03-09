@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:labl_app/navigation/custom_app_router.dart';
+import 'package:labl_app/navigation/base_widget.dart';
 
 class ShowImageWidget extends StatefulWidget {
   final String image;
@@ -45,15 +47,40 @@ class _ShowImageWidgetState extends State<ShowImageWidget> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: Colors.white,
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: //Image.asset(image),
-        FittedBox(
-          fit: BoxFit.fitHeight,
-          child: Image.network(image),
-        ) // test purposes
+    return Stack(
+      children: <Widget>[
+        Container(
+            color: Colors.white,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: //Image.asset(image),
+            FittedBox(
+              fit: BoxFit.fitHeight,
+              child: Image.network(image),
+            ) // test purposes
+        ),
+        Positioned(
+          top: 40,
+          left: 40,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(new AppPageRoute(
+                  shouldGoToTheRight: false,
+                  builder: (BuildContext context) =>
+                  new BaseWidget(1)));
+            },
+            child: CircleAvatar(
+              radius: 40,
+              backgroundColor: Colors.amberAccent,
+              child: Icon(
+                Icons.arrow_back,
+                color: Colors.white70,
+                size: 50,
+              ),
+            ),
+          ),
+        )
+      ],
     );
   }
 }

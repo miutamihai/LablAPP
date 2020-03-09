@@ -225,21 +225,28 @@ class _ShowMainInfoState extends State<ShowMainInfo>
             _drawerHandler(),
             showStarsAndRating(Theme.of(context).primaryColor),
             Container(
-                color: Colors.amberAccent,
+              color: Colors.grey[300],
+              height: 10
+            ),
+            Container(
+                color: Colors.grey[300],
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width * 0.9,
-                child: Card(
-                    margin: new EdgeInsets.all(10),
-                    elevation: 10,
-                    color: Colors.amber[50],
-                    child: Text(
-                    "Ireland's average price for a $beerLabel is $beerPrice",
-                    style: TextStyle(
-                        decoration: TextDecoration.none,
-                        fontSize: 18
-                    ),
-                  )
-                )),
+                child: Text(
+                  "Ireland's average price for a $beerLabel is $beerPrice",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      decoration: TextDecoration.none,
+                      fontSize: 30,
+                    fontFamily: 'Acme',
+                    color: Colors.grey[800],
+                  ),
+                )
+            ),
+            Container(
+                color: Colors.grey[300],
+                height: 10
+            ),
             Container(
               alignment: Alignment.center,
               height: MediaQuery.of(context).size.height,

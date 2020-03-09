@@ -9,7 +9,12 @@ class ProductList extends StatefulWidget {
 }
 
 class _ProductListState extends State<ProductList>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin<ProductList> {
+
+  @override
+  bool get wantKeepAlive => true;
+
+
   final List<Product> _listOfProducts = [
     Product(
         name: 'Guinness',

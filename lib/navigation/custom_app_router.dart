@@ -5,20 +5,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
-final Tween<Offset> _kBottomUpTween = new Tween<Offset>(
-  begin: const Offset(0.0, 1.0),
-  end: Offset.zero,
-);
+Tween<Offset> GetBottomUpTween(){
+  return Tween<Offset>(
+    begin: const Offset(0.0, 1.0),
+    end: Offset.zero,
+  );
+}
 
-// Offset from offscreen to the right to fully on screen.
-final Tween<Offset> _kRightMiddleTween = new Tween<Offset>(
-  begin: const Offset(1.0, 0.0),
-  end: Offset.zero,
-);
+Tween<Offset> GetRightMiddleTween(bool shouldGoToTheRight){
+  print(shouldGoToTheRight);
+  Offset offset = (shouldGoToTheRight ? Offset(1.0, 0.0) : Offset(-1.0, 0.0));
+  //Offset offset = Offset(1.0, 0.0);
+  return Tween<Offset>(
+    begin: offset,
+    end: Offset.zero,
+  );
+}
 
 
 // Offset from offscreen below to fully on screen.
 class AppPageRoute extends MaterialPageRoute<String> {
+
+  final bool shouldGoToTheRight;
 
   @override
   final bool maintainState;
@@ -28,6 +36,7 @@ class AppPageRoute extends MaterialPageRoute<String> {
   CupertinoPageRoute<String> _internalCupertinoPageRoute;
 
   AppPageRoute({
+    @required this.shouldGoToTheRight,
     @required this.builder,
     RouteSettings settings: const RouteSettings(),
     this.maintainState: true,
@@ -84,30 +93,33 @@ class AppPageRoute extends MaterialPageRoute<String> {
       return _cupertinoPageRoute.buildTransitions(context, animation, secondaryAnimation, child);
     }
 
-    return new _CustomPageTransition(routeAnimation: animation, child: child, fullscreenDialog: fullscreenDialog);
+    return new _CustomPageTransition(routeAnimation: animation, child: child, fullscreenDialog: fullscreenDialog, shouldGoToTheRight: shouldGoToTheRight,);
   }
 }
 
+// ignore: must_be_immutable
 class _CustomPageTransition extends StatelessWidget {
-  final Animation<Offset> _positionAnimation;
+  Animation<Offset> _positionAnimation;
   final Widget child;
   final bool fullscreenDialog;
+  final bool shouldGoToTheRight;
 
   _CustomPageTransition({
     Key key,
     @required Animation<double> routeAnimation,
     @required this.child,
-    @required this.fullscreenDialog,
-  })  : _positionAnimation = !fullscreenDialog ?
-  _kRightMiddleTween.animate(new CurvedAnimation(
-  parent: routeAnimation,
-  curve: Curves.elasticIn,
-  ))
-      : _kBottomUpTween.animate(new CurvedAnimation(
-    parent: routeAnimation, // The route's linear 0.0 - 1.0 animation.
-    curve: Curves.elasticIn,
-  )),
-        super(key: key);
+    @required this.fullscreenDialog, this.shouldGoToTheRight,
+  })  {
+    _positionAnimation = !fullscreenDialog ?
+    GetRightMiddleTween(this.shouldGoToTheRight).animate(new CurvedAnimation(
+      parent: routeAnimation,
+      curve: Curves.elasticIn,
+    ))
+        : GetBottomUpTween().animate(new CurvedAnimation(
+      parent: routeAnimation, // The route's linear 0.0 - 1.0 animation.
+      curve: Curves.elasticIn,
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
