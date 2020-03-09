@@ -7,6 +7,7 @@ class FireStoreService {
   var _beers; 
 
   FireStoreService() {
+    print('beer collection initialised');
     _beers = _fireStoreInstance.collection('Beers');
   }
   

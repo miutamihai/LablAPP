@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:labl_app/models/comment.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -61,7 +60,6 @@ class _ShowMainInfoState extends State<ShowMainInfo>
   void initState() {
     print(finalResponse);
     var jsonString = jsonDecode(finalResponse);
-
     beerLabel = jsonString['label'];
     beerPrice = jsonString['price'];
     controller = AnimationController(
@@ -70,9 +68,17 @@ class _ShowMainInfoState extends State<ShowMainInfo>
       ..addListener(() {
         setState(() {});
       });
-    _document = _firestoreService.Beers.document(beerLabel);
-    getComments();
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies(){
+    setState(() {
+      _firestoreService=Provider.of<FireStoreService>(context);
+      _document = _firestoreService.Beers.document(beerLabel);
+      getComments();
+    });
+    super.didChangeDependencies();
   }
   
   @override
@@ -83,7 +89,7 @@ class _ShowMainInfoState extends State<ShowMainInfo>
   final finalResponse;
 
   _ShowMainInfoState(this.finalResponse){
-    _firestoreService=Provider.of<FireStoreService>(context);
+
   }
 
   Widget getStars(double stars) {

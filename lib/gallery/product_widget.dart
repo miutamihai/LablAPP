@@ -18,7 +18,6 @@ class ProductCard extends StatefulWidget {
 class _ProductCardState extends State<ProductCard>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
-  DocumentSnapshot firebase;
   DocumentReference _document;
   Widget beerDescription;
   Product product;
@@ -27,7 +26,6 @@ class _ProductCardState extends State<ProductCard>
       'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.iconfinder.com%2Ficons%2F3273769%2Fempty_image_picture_placeholder_icon&psig=AOvVaw2uSARERdJv82tA4y2fZjjp&ust=1583538146682000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMifqbnBhOgCFQAAAAAdAAAAABAD';
   _ProductCardState(product) {
     this.product = product;
-    _firestoreService= Provider.of<FireStoreService>(context);
   }
    
 
@@ -68,9 +66,6 @@ class _ProductCardState extends State<ProductCard>
   void initState() {
     _controller = AnimationController(vsync: this);
     loadImageFromStorage();
-    _document = _firestoreService.Beers.document(product.name);
-    getBeerReview();
-    beerDescription = BeerDescription(_document, product.name, product.image);
     super.initState();
   }
 
@@ -78,6 +73,17 @@ class _ProductCardState extends State<ProductCard>
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeDependencies(){
+    setState(() {
+      _firestoreService= Provider.of<FireStoreService>(context);
+      _document = _firestoreService.Beers.document(product.name);
+      getBeerReview();
+      beerDescription = BeerDescription(_document, product.name, product.image);
+    });
+    super.didChangeDependencies();
   }
 
   @override
