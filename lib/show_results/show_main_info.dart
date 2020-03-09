@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:labl_app/models/comment.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:labl_app/services/firestore_service.dart';
+import 'package:provider/provider.dart';
 
 class ShowMainInfo extends StatefulWidget {
   final finalResponse;
@@ -20,7 +22,7 @@ class _ShowMainInfoState extends State<ShowMainInfo>
   double maxTop = 500;
   double minTop = 0;
   double rating = 3.7;
-  DocumentSnapshot firebase;
+  var _firestoreService;
   DocumentReference _document;
   List<Comment> comments = [
     Comment('', "User1",
@@ -40,6 +42,8 @@ class _ShowMainInfoState extends State<ShowMainInfo>
   ];
   Animation<double> animation;
   AnimationController controller;
+
+  
 
   Future<void> getComments() async {
     await _document.get().then((value) {
@@ -66,7 +70,7 @@ class _ShowMainInfoState extends State<ShowMainInfo>
       ..addListener(() {
         setState(() {});
       });
-    _document = Firestore.instance.collection('Beers').document(beerLabel);
+    _document = _firestoreService.Beers.document(beerLabel);
     getComments();
     super.initState();
   }
@@ -78,7 +82,9 @@ class _ShowMainInfoState extends State<ShowMainInfo>
 
   final finalResponse;
 
-  _ShowMainInfoState(this.finalResponse);
+  _ShowMainInfoState(this.finalResponse){
+    _firestoreService=Provider.of<FireStoreService>(context);
+  }
 
   Widget getStars(double stars) {
     return Container(

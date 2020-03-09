@@ -84,7 +84,7 @@ Widget submitButton(context) {
                 color: Colors.white,
               ),
             ),
-            onPressed: () {},
+            onPressed: () {}, //TODO: finish button logic
           ),
         ),
       )
@@ -112,7 +112,7 @@ Widget registerButton(context) {
                 color: Colors.white,
               ),
             ),
-            onPressed: () {},
+            onPressed: () {}, //TODO: finish button logic
           ),
         ),
       )

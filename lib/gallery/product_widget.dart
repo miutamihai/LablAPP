@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:labl_app/models/product.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:labl_app/services/firestore_service.dart';
+import 'package:provider/provider.dart';
 import 'package:slimy_card/slimy_card.dart';
 import 'beer_description.dart';
 
@@ -20,11 +22,14 @@ class _ProductCardState extends State<ProductCard>
   DocumentReference _document;
   Widget beerDescription;
   Product product;
+  var _firestoreService;
   String image =
       'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.iconfinder.com%2Ficons%2F3273769%2Fempty_image_picture_placeholder_icon&psig=AOvVaw2uSARERdJv82tA4y2fZjjp&ust=1583538146682000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMifqbnBhOgCFQAAAAAdAAAAABAD';
   _ProductCardState(product) {
     this.product = product;
+    _firestoreService= Provider.of<FireStoreService>(context);
   }
+   
 
   Future<void> loadImageFromStorage() async {
     await FirebaseStorage.instance
@@ -63,7 +68,7 @@ class _ProductCardState extends State<ProductCard>
   void initState() {
     _controller = AnimationController(vsync: this);
     loadImageFromStorage();
-    _document = Firestore.instance.collection('Beers').document(product.name);
+    _document = _firestoreService.Beers.document(product.name);
     getBeerReview();
     beerDescription = BeerDescription(_document, product.name, product.image);
     super.initState();
