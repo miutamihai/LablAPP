@@ -1,16 +1,23 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:labl_app/navigation/base_widget.dart';
 import 'package:dashed_circle/dashed_circle.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_reveal_animation/circular_reveal_animation.dart';
 import 'package:labl_app/navigation/custom_app_router.dart';
+import 'package:labl_app/account/sign_up.dart';
 
 class WelcomeScreen extends StatefulWidget {
+  final bool userExists;
+  final FirebaseAuth authInstance;
+  const WelcomeScreen({Key key, this.userExists, this.authInstance}) : super(key: key);
   @override
-  _WelcomeScreenState createState() => _WelcomeScreenState();
+  _WelcomeScreenState createState() => _WelcomeScreenState(this.userExists, this.authInstance);
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> with TickerProviderStateMixin {
+  bool userExists;
+  FirebaseAuth authInstance;
   AnimationController _revealController;
   AnimationController _dotRotationController;
   AnimationController _textFadeController;
@@ -23,10 +30,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> with TickerProviderStateM
   Animation _invertedAnimation;
   String _logoAnimation;
 
+  _WelcomeScreenState(bool _userExists, FirebaseAuth _authInstance){
+    this.userExists = _userExists;
+    this.authInstance = _authInstance;
+  }
+
   Future goToHeroPage() async {
-    await new Future.delayed(const Duration(milliseconds: 1000));
+    await new Future.delayed(const Duration(milliseconds: 100));
     Navigator.of(context).push(
-        new AppPageRoute(shouldGoToTheRight: true ,builder: (BuildContext context) => new BaseWidget(2)));
+        new AppPageRoute(shouldGoToTheRight: true ,builder: (BuildContext context){
+          return (userExists == true ? BaseWidget(2) :
+          SignUpPage(authInstance: authInstance,));
+        }));
   }
 
   @override

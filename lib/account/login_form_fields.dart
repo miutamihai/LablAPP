@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
-Widget emailField({double paddingTop}) {
+Widget usernameField({double paddingTop}) {
   return Padding(
     padding: EdgeInsets.only(top: paddingTop == null ? 30 : paddingTop),
     child: Material(
@@ -10,7 +10,7 @@ Widget emailField({double paddingTop}) {
               borderRadius: new BorderRadius.circular(10.0)),
       child: TextFormField(
         decoration: InputDecoration(
-          hintText: "email@example.com",
+          hintText: "Display name",
           filled: true,
           fillColor: Colors.white,
           hintStyle: TextStyle(color: Colors.black87.withOpacity(0.5)),
@@ -67,34 +67,6 @@ Widget submitButton(context) {
       alignment: Alignment.bottomCenter,
       child: Align(
         alignment: Alignment.bottomLeft,
-        child: Container(
-          margin: EdgeInsets.only(bottom: 30),
-          width: MediaQuery.of(context).size.width / 4,
-          height: 75,
-          child: RaisedButton(
-            elevation: 0,
-            highlightElevation: 10,
-            color: Colors.amberAccent[400],
-            highlightColor: Colors.amberAccent[400],
-            shape: RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(10.0)),
-            child: Text(
-              "Login",
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-            onPressed: () {}, //TODO: finish button logic
-          ),
-        ),
-      )
-  );
-}
-Widget registerButton(context) {
-  return Align(
-      alignment: Alignment.bottomCenter,
-      child: Align(
-        alignment: Alignment.bottomRight,
         child: Container(
           margin: EdgeInsets.only(bottom: 30),
           width: MediaQuery.of(context).size.width / 4,

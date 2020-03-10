@@ -6,16 +6,21 @@ import 'login_form_fields.dart';
 
 class LogIn extends StatefulWidget {
   static const String id = 'account';
-
-  LogIn();
-
+  final String uniqueID;
+  LogIn(this.uniqueID);
   @override
-  _LogInState createState() => _LogInState();
+  _LogInState createState() => _LogInState(this.uniqueID);
 }
 
 class _LogInState extends State<LogIn> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  String uniqueID;
+
+  _LogInState(String _uniqueID){
+    this.uniqueID = _uniqueID;
+  }
 
   void submitData() async {
     final enteredEmail = emailController.text;
@@ -34,77 +39,57 @@ class _LogInState extends State<LogIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white70,
-      body: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          double paddingTopEmailField = 10;
-          double paddingTopPasswordField = 10;
-
-          if (constraints.constrainHeight() <= 300) {
-            paddingTopEmailField = 5;
-            paddingTopPasswordField = 15;
-          }
-
-          return Stack(
-            children: <Widget>[
-              Container(
-                child: FlareActor(
-                  "assets/animations/flow_bkg.flr",
-                  animation: "Flow",
-                  color: Colors.grey,
-                ),
+      body: Stack(
+        children: <Widget>[
+          Positioned(
+            top: 0,
+            right: 0,
+            child: FlareActor(
+              "assets/animations/flow_bkg.flr",
+              animation: "Flow",
+              color: Colors.grey,
+            ),
+          ),
+          Positioned(
+            top: 20,
+            child: Align(
+              alignment: Alignment.center,
+              child: FlareActor(
+                'assets/animations/BeerFromTheClouds.flr',
+                animation: 'Hover',
               ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                padding: EdgeInsets.only(left: 25, right: 25, top: 100),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Expanded(
-                      flex: 2,
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: FlareActor(
-                          'assets/animations/BeerFromTheClouds.flr',
-                          animation: 'Hover',
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        child: loginText(),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                        child: Form(
-                          child: Column(
-                            //mainAxisSize: MainAxisSize.max,
-                            children: <Widget>[
-                              emailField(paddingTop: paddingTopEmailField),
-                              passwordField(
-                                  paddingTop: paddingTopPasswordField),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  submitButton(context),
-                                  registerButton(context),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            padding: EdgeInsets.only(left: 25, right: 25, top: 100),
+            child: ListView(
+              children: <Widget>[
+                Container(
+                  child: loginText(),
                 ),
-              ),
-            ],
-          );
-        },
-      ),
+                Container(
+                  child: Form(
+                    child: Column(
+                      //mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        usernameField(paddingTop: 10),
+                        passwordField(
+                            paddingTop: 10),
+                        Align(
+                          alignment: Alignment.center,
+                          child: submitButton(context),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      )
     );
   }
 
@@ -112,18 +97,16 @@ class _LogInState extends State<LogIn> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Expanded(
-          child: Align(
-            alignment: Alignment.bottomLeft,
-            child: Text("Welcome,",
-                style: TextStyle(
-                  fontSize: 30.0,
-                  color: Colors.white,
-                )),
-          ),
+        Align(
+          alignment: Alignment.bottomLeft,
+          child: Text("Welcome,",
+              style: TextStyle(
+                fontSize: 30.0,
+                color: Colors.white,
+              )),
         ),
         Text(
-          "Sign in to continue",
+          "Tell us some things about you",
           style: TextStyle(
             fontSize: 18.0,
             color: Colors.white,

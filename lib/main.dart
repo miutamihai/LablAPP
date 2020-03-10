@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:labl_app/services/firestore_service.dart';
-import 'package:labl_app/welcome_screen/welcome_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:labl_app/welcome_screen/check_user_exists_widget.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -52,11 +53,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Stack(
-      children: <Widget>[
-        WelcomeScreen()
-      ],
-    ));
+    return CheckUserExists();
   }
 }

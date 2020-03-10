@@ -4,6 +4,7 @@ import 'package:labl_app/gallery/products_list.dart';
 import 'package:labl_app/account/log_in.dart';
 import 'nav_bar/tab_bar.dart';
 import 'nav_bar/tab_item_icon.dart';
+import 'package:flutter/services.dart';
 
 class BaseWidget extends StatefulWidget {
   final int selectedIndex;
@@ -51,7 +52,7 @@ class _BaseWidgetState extends State<BaseWidget>
     _controller = AnimationController(vsync: this);
     _cameraPage = CameraPage(key: _cameraKey,);
     _galleryPage = ProductList();
-    _accountPage  = LogIn();
+    _accountPage  = LogIn('');
     super.initState();
   }
 
@@ -63,6 +64,10 @@ class _BaseWidgetState extends State<BaseWidget>
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+    SystemChrome.setEnabledSystemUIOverlays([]);
     return DefaultTabController(
       length: iconList.length,
       child: Scaffold(
