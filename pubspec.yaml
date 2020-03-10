@@ -43,7 +43,7 @@ dependencies:
   slimy_card: ^1.0.1
   property_change_notifier: any
   flutter_launcher_icons: any
-
+  draggable_scrollbar: ^0.0.4
 
 dev_dependencies:
   flutter_test:

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:labl_app/camera/camera_page.dart';
 import 'package:labl_app/gallery/products_list.dart';
-import 'package:labl_app/account/log_in.dart';
+import 'package:labl_app/account/account_details.dart';
 import 'nav_bar/tab_bar.dart';
 import 'nav_bar/tab_item_icon.dart';
 import 'package:flutter/services.dart';
@@ -52,7 +52,7 @@ class _BaseWidgetState extends State<BaseWidget>
     _controller = AnimationController(vsync: this);
     _cameraPage = CameraPage(key: _cameraKey,);
     _galleryPage = ProductList();
-    _accountPage  = LogIn('');
+    _accountPage  = AccountDetails();
     super.initState();
   }
 

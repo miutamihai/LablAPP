@@ -15,4 +15,5 @@ class FireStoreService {
   
   get Beers => _beers; 
   get Users => _users;
+  get Instance => _fireStoreInstance;
 }

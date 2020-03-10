@@ -20,8 +20,6 @@ class _CheckUserExistsState extends State<CheckUserExists> {
     return _userExists;
   }
 
-
-
   @override
   void initState() {
     //_auth.signOut();
