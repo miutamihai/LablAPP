@@ -44,6 +44,8 @@ dependencies:
   property_change_notifier: any
   flutter_launcher_icons: any
   draggable_scrollbar: ^0.0.4
+  geolocator: ^5.3.0
+  alpha2_countries: ^1.0.5
 
 dev_dependencies:
   flutter_test:

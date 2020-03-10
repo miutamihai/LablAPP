@@ -6,9 +6,22 @@ import 'package:http/http.dart' as http;
 import 'loading_screen.dart';
 import 'package:labl_app/navigation/custom_app_router.dart';
 import 'package:labl_app/navigation/base_widget.dart';
+import 'package:geolocator/geolocator.dart';
 
+// ignore: must_be_immutable
 class ShowResult extends StatelessWidget {
   final image;
+  String country = 'Germany';
+
+  Future<void> getLocation()async{
+    print(GeolocationPermission.location.value);
+    await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high).then((position) async {
+      print(position.toString());
+      await Geolocator().placemarkFromPosition(position).then((placemark){
+        country = placemark[0].country;
+      });
+    });
+  }
 
   Future<String> sendImage(File image) async {
     var uri = Uri.parse('https://lablapi.appspot.com/');
@@ -20,7 +33,7 @@ class ShowResult extends StatelessWidget {
         filename: 'sent-file.png');
     request.fields.addEntries([
       MapEntry('password', 'L@blAPI1268.!'),
-      MapEntry('country', 'Ireland'),
+      MapEntry('country', country),
     ]);
     request.files.add(imageToBeSent);
     var response = await request.send();
@@ -28,7 +41,9 @@ class ShowResult extends StatelessWidget {
     return finalResult;
   }
 
-  ShowResult({@required this.image});
+  ShowResult({@required this.image}){
+    getLocation();
+  }
 
   Widget showImage(MediaQueryData mediaQueryData) {
     return Container(

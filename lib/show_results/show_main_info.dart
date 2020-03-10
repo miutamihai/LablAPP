@@ -178,11 +178,27 @@ class _ShowMainInfoState extends State<ShowMainInfo>
                         RichText(
                           text: TextSpan(children: [
                             TextSpan(
-                              text: "${comments[index].username}" + " " + "${comments[index].madeIn}",
+                              text: "${comments[index].username}",
                               style: TextStyle(
                                 color: Colors.grey[800],
                                 fontSize: 30,
                                 fontFamily: 'Acme'
+                              ),
+                            ),
+                            TextSpan(
+                              text:"   in   ",
+                              style: TextStyle(
+                                color: Colors.grey[800],
+                                fontSize: 20,
+                                fontFamily: 'Acme'
+                              )
+                            ),
+                            TextSpan(
+                              text: "${comments[index].madeIn}",
+                              style: TextStyle(
+                                  color: Colors.grey[800],
+                                  fontSize: 30,
+                                  fontFamily: 'Acme'
                               ),
                             ),
                             TextSpan(text: "\n"),

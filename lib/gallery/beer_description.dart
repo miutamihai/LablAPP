@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:labl_app/show_results/show_main_info.dart';
 import 'package:labl_app/show_results/show_image_widget.dart';
 import 'package:labl_app/show_results/loading_screen.dart';
+import 'package:geolocator/geolocator.dart';
 
 class BeerDescription extends StatefulWidget {
   final DocumentReference document;
@@ -23,11 +24,24 @@ class _BeerDescriptionState extends State<BeerDescription>
   String label = '';
   String result = '';
   String image;
+  String country;
 
   _BeerDescriptionState(DocumentReference document, String label, image) {
     this.document = document;
     this.label = label;
     this.image = image;
+  }
+
+  Future<void> getLocation()async{
+    print(GeolocationPermission.location.value);
+    await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high).then((position) async {
+      print(position.toString());
+      await Geolocator().placemarkFromPosition(position).then((placemark){
+        setState(() {
+          country = placemark[0].country;
+        });
+      });
+    });
   }
 
   Future<void> getBeerDescription() async {
@@ -46,7 +60,7 @@ class _BeerDescriptionState extends State<BeerDescription>
     request.headers.addAll(headers);
     request.fields.addEntries([
       MapEntry('label', label),
-      MapEntry('country', 'Ireland'),
+      MapEntry('country', country),
     ]);
     var response = await request.send();
     var finalResult = await response.stream.bytesToString();
@@ -59,6 +73,7 @@ class _BeerDescriptionState extends State<BeerDescription>
   void initState() {
     _controller = AnimationController(vsync: this);
     getBeerDescription();
+    getLocation();
     super.initState();
   }
 

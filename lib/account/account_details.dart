@@ -195,7 +195,7 @@ class _AccountDetailsState extends State<AccountDetails> with SingleTickerProvid
     return GestureDetector(
       onTap: (){
         setState(() {
-          _isEditing = true;
+          _isEditing = !_isEditing;
         });
       },
       child: Container(
