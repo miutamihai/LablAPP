@@ -139,7 +139,7 @@ class _BeerDescriptionState extends State<BeerDescription>
                                   return SafeArea(
                                     child: Stack(children: <Widget>[
                                       ShowImageWidget(label: label, image: image),
-                                      ShowMainInfo(snapshot.data),
+                                      ShowMainInfo(snapshot.data, country),
                                     ]),
                                   );
                               },

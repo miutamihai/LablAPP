@@ -9,16 +9,32 @@ import 'package:labl_app/navigation/base_widget.dart';
 import 'package:geolocator/geolocator.dart';
 
 // ignore: must_be_immutable
-class ShowResult extends StatelessWidget {
+class ShowResult extends StatefulWidget {
   final image;
+
+  const ShowResult({Key key, this.image}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _ShowResultState(image);
+
+}
+
+class _ShowResultState extends State<ShowResult>{
+  var image;
   String country = 'Germany';
 
-  Future<void> getLocation()async{
+  _ShowResultState(_image){
+    this.image = _image;
+  }
+
+  Future<void> getLocation() async{
     print(GeolocationPermission.location.value);
     await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high).then((position) async {
       print(position.toString());
       await Geolocator().placemarkFromPosition(position).then((placemark){
-        country = placemark[0].country;
+        setState(() {
+          country = placemark[0].country;
+        });
       });
     });
   }
@@ -41,8 +57,10 @@ class ShowResult extends StatelessWidget {
     return finalResult;
   }
 
-  ShowResult({@required this.image}){
+  @override
+  void initState(){
     getLocation();
+    super.initState();
   }
 
   Widget showImage(MediaQueryData mediaQueryData) {
@@ -69,7 +87,7 @@ class ShowResult extends StatelessWidget {
         } else
           return  Stack(children: <Widget>[
             showImage(MediaQuery.of(context)),
-            ShowMainInfo(snapshot.data),
+            ShowMainInfo(snapshot.data, country),
             Positioned(
               top: 40,
               left: 40,

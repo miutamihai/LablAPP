@@ -9,17 +9,19 @@ import 'package:http/http.dart' as http;
 
 class ShowMainInfo extends StatefulWidget {
   final finalResponse;
+  final String country;
 
-  ShowMainInfo(this.finalResponse);
+  ShowMainInfo(this.finalResponse, this.country);
 
   @override
-  _ShowMainInfoState createState() => _ShowMainInfoState(finalResponse);
+  _ShowMainInfoState createState() => _ShowMainInfoState(finalResponse, country);
 }
 
 class _ShowMainInfoState extends State<ShowMainInfo>
     with SingleTickerProviderStateMixin {
   String beerLabel;
   String beerPrice;
+  String country;
   double maxTop = 500;
   double minTop = 0;
   double rating = 3.7;
@@ -96,6 +98,7 @@ class _ShowMainInfoState extends State<ShowMainInfo>
     var jsonString = jsonDecode(finalResponse);
     beerLabel = jsonString['label'];
     beerPrice = jsonString['price'];
+    print(beerPrice);
     controller = AnimationController(
         duration: const Duration(milliseconds: 200), vsync: this);
     animation = Tween<double>(begin: maxTop, end: minTop).animate(controller)
@@ -123,8 +126,8 @@ class _ShowMainInfoState extends State<ShowMainInfo>
 
   final finalResponse;
 
-  _ShowMainInfoState(this.finalResponse){
-
+  _ShowMainInfoState(this.finalResponse, String _country){
+    this.country = _country;
   }
 
   Widget getStars(double stars) {
@@ -296,7 +299,7 @@ class _ShowMainInfoState extends State<ShowMainInfo>
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: Text(
-                  "Ireland's average price for a $beerLabel is $beerPrice",
+                  "${country}'s average price for a $beerLabel is $beerPrice",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       decoration: TextDecoration.none,
