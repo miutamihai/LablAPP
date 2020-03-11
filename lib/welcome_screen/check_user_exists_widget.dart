@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:labl_app/welcome_screen/welcome_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -20,9 +21,15 @@ class _CheckUserExistsState extends State<CheckUserExists> {
     return _userExists;
   }
 
+  Future<void> getPermissions() async {
+    await PermissionHandler().requestPermissions([PermissionGroup.camera, PermissionGroup.location,
+      PermissionGroup.photos, PermissionGroup.storage, PermissionGroup.microphone, PermissionGroup.locationAlways]);
+  }
+
   @override
   void initState() {
     //_auth.signOut();
+    getPermissions();
     super.initState();
   }
 

@@ -202,11 +202,14 @@ class _LogInState extends State<LogIn> {
               children: <Widget>[
                 Container(
                   height: MediaQuery.of(context).size.height * 0.865,
-                  child: FlareActor(
-                    "assets/animations/flow_bkg.flr",
-                    animation: "Flow",
-                    color: Colors.grey,
-                  ),
+                  child: Hero(
+                    tag: 'background-hero',
+                    child: FlareActor(
+                      "assets/animations/flow_bkg.flr",
+                      animation: "Flow",
+                      color: Colors.grey,
+                    ),
+                  )
                 ),
                 Positioned(
                   top: 60,
@@ -215,9 +218,12 @@ class _LogInState extends State<LogIn> {
                   width: 300,
                   child: Align(
                     alignment: Alignment.center,
-                    child: FlareActor(
-                      'assets/animations/BeerFromTheClouds.flr',
-                      animation: 'Hover',
+                    child: Hero(
+                      tag: 'phone-hero',
+                      child: FlareActor(
+                        'assets/animations/BeerFromTheClouds.flr',
+                        animation: 'Hover',
+                      ),
                     ),
                   ),
                 ),
@@ -228,7 +234,7 @@ class _LogInState extends State<LogIn> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       SizedBox(
-                        height: 350,
+                        height: 400,
                       ),
                       _title(),
                       Row(

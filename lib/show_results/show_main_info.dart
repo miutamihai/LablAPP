@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:labl_app/services/firestore_service.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:http/http.dart' as http;
 
 class ShowMainInfo extends StatefulWidget {
   final finalResponse;
@@ -21,8 +23,11 @@ class _ShowMainInfoState extends State<ShowMainInfo>
   double maxTop = 500;
   double minTop = 0;
   double rating = 3.7;
+  double exchangeRate = 1.0;
+  FirebaseAuth _auth = FirebaseAuth.instance;
   var _firestoreService;
   DocumentReference _document;
+  DocumentReference _userData;
   List<Comment> comments = [
     Comment('', "User1",
         "Nice Beer Bros"),
@@ -42,8 +47,6 @@ class _ShowMainInfoState extends State<ShowMainInfo>
   Animation<double> animation;
   AnimationController controller;
 
-  
-
   Future<void> getComments() async {
     await _document.get().then((value) {
       setState(() {
@@ -52,6 +55,37 @@ class _ShowMainInfoState extends State<ShowMainInfo>
         comments = List<Comment>.from(value['Comments'].map(
             (d) => Comment.fromMap(d)
         ));
+      });
+    });
+  }
+
+  Future<void> getDollarToEuroRate() async{
+    var uri = Uri.parse('https://api.exchangeratesapi.io/latest?base=USD&symbols=EUR');
+    var request = http.Request('GET', uri);
+    var response = await request.send();
+    var finalResult = await response.stream.bytesToString();
+    print(finalResult);
+    var jsonString = jsonDecode(finalResult);
+    print(jsonString);
+    double rate = jsonString['rates']['EUR'];
+    print('got euro rate of ${rate}');
+    setState(() {
+      exchangeRate = rate;
+      beerPrice = '€' + (double.parse(beerPrice.substring(1)) *
+          exchangeRate).toStringAsFixed(1);
+    });
+  }
+
+  Future<void> checkCurrencyExchange() async {
+    await FirebaseAuth.instance.currentUser().then((user) {
+      setState(() {
+        _userData = _firestoreService.Users.document(user.email);
+        _userData.get().then((userData) {
+          String _prefferedCurrency = userData['Preffered currency'];
+          if(_prefferedCurrency == 'Euros'){
+            getDollarToEuroRate();
+          }
+        });
       });
     });
   }
@@ -68,6 +102,7 @@ class _ShowMainInfoState extends State<ShowMainInfo>
       ..addListener(() {
         setState(() {});
       });
+    checkCurrencyExchange();
     super.initState();
   }
 

@@ -127,9 +127,6 @@ class _ProductCardState extends State<ProductCard>
                 margin: const EdgeInsets.symmetric(vertical: 8.0)),
             new Row(
               children: <Widget>[
-                new Icon(Icons.attach_money, size: 30, color: Colors.amber),
-                new Text(product.price, style: headerTextStyle),
-                new Container(width: 10),
                 new Icon(
                   Icons.favorite,
                   size: 30,
