@@ -55,7 +55,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Future getImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-
     setState(() {
       _image = image;
     });

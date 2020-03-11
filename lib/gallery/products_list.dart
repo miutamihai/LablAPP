@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:labl_app/gallery/product_widget.dart';
 import 'package:labl_app/models/product.dart';
+import 'package:labl_app/show_results/show_results.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:labl_app/camera/show_image.dart';
 
 class ProductList extends StatefulWidget {
   static const String id = 'gallery';
@@ -46,6 +49,69 @@ class _ProductListState extends State<ProductList>
     super.dispose();
   }
 
+  Future getImage() async {
+    await ImagePicker.pickImage(source: ImageSource.gallery).then((image) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ShowImage(image.path)),
+      );
+    });
+  }
+
+  Widget _uploadFromGalleryWidget(){
+    return Align(
+      alignment: Alignment.bottomLeft,
+      child: GestureDetector(
+        onTap: (){
+          getImage();
+        },
+        child: Container(
+            margin: const EdgeInsets.only(left: 20),
+            width: 210,
+            decoration: new BoxDecoration(
+              color: Colors.amber[50],
+              shape: BoxShape.rectangle,
+              borderRadius: new BorderRadius.circular(8.0),
+              boxShadow: <BoxShadow>[
+                new BoxShadow(
+                    color: Colors.black,
+                    blurRadius: 10.0,
+                    offset: new Offset(0.0, 10.0))
+              ],
+            ),
+            child: Row(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Text(
+                    'Pick from gallery',
+                    style: TextStyle(
+                        fontSize: 16.0, color: Colors.grey[800], fontWeight: FontWeight.w400
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: CircleAvatar(
+                      backgroundColor: Colors.amber,
+                      radius: 30,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Icon(
+                          Icons.add_photo_alternate,
+                          size: 30,
+                          color: Colors.white,
+                        ),
+                      )
+                  ),
+                )
+              ],
+            )
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,6 +129,7 @@ class _ProductListState extends State<ProductList>
             ),
             itemCount: this._listOfProducts.length + 1,
           ),
+          _uploadFromGalleryWidget(),
         ],
       )
     );

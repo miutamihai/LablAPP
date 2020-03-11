@@ -11,7 +11,11 @@ class ShowImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(children: <Widget>[
-      Container(child: Image.file(File(path))),
+      Container(
+        width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: Image.file(File(path))
+      ),
       Align(
         alignment: Alignment.bottomCenter,
         child: AcceptOrRepeat(
