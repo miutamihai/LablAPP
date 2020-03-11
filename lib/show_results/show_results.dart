@@ -85,31 +85,33 @@ class _ShowResultState extends State<ShowResult>{
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Loader();
         } else
-          return  Stack(children: <Widget>[
-            showImage(MediaQuery.of(context)),
-            ShowMainInfo(snapshot.data, country),
-            Positioned(
-              top: 40,
-              left: 40,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(new AppPageRoute(
-                      shouldGoToTheRight: false,
-                      builder: (BuildContext context) =>
-                      new BaseWidget(2)));
-                },
-                child: CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Colors.amberAccent,
-                  child: Icon(
-                    Icons.arrow_back,
-                    color: Colors.white70,
-                    size: 50,
+          return  Scaffold(
+            body: Stack(children: <Widget>[
+              showImage(MediaQuery.of(context)),
+              ShowMainInfo(snapshot.data, country),
+              Positioned(
+                top: 40,
+                left: 40,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(new AppPageRoute(
+                        shouldGoToTheRight: false,
+                        builder: (BuildContext context) =>
+                        new BaseWidget(2)));
+                  },
+                  child: CircleAvatar(
+                    radius: 40,
+                    backgroundColor: Colors.amberAccent,
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white70,
+                      size: 50,
+                    ),
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+            ),
           );
       },
     );

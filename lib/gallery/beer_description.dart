@@ -136,8 +136,8 @@ class _BeerDescriptionState extends State<BeerDescription>
                                   return Loader();
                                 }
                                 else
-                                  return SafeArea(
-                                    child: Stack(children: <Widget>[
+                                  return Scaffold(
+                                    body: Stack(children: <Widget>[
                                       ShowImageWidget(label: label, image: image),
                                       ShowMainInfo(snapshot.data, country),
                                     ]),

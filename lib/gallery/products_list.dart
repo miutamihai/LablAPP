@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:labl_app/gallery/product_widget.dart';
 import 'package:labl_app/models/product.dart';
-import 'package:labl_app/show_results/show_results.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:labl_app/camera/show_image.dart';
 

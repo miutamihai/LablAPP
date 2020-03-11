@@ -6,6 +6,7 @@ import 'package:labl_app/services/firestore_service.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
+import 'make_comment_widget.dart';
 
 class ShowMainInfo extends StatefulWidget {
   final finalResponse;
@@ -48,6 +49,7 @@ class _ShowMainInfoState extends State<ShowMainInfo>
   ];
   Animation<double> animation;
   AnimationController controller;
+
 
   Future<void> getComments() async {
     await _document.get().then((value) {
@@ -291,8 +293,8 @@ class _ShowMainInfoState extends State<ShowMainInfo>
             _drawerHandler(),
             showStarsAndRating(Theme.of(context).primaryColor),
             Container(
-              color: Colors.grey[300],
-              height: 10
+                color: Colors.grey[300],
+                height: 10
             ),
             Container(
                 color: Colors.grey[300],
@@ -302,8 +304,8 @@ class _ShowMainInfoState extends State<ShowMainInfo>
                   "${country}'s average price for a $beerLabel is $beerPrice",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      decoration: TextDecoration.none,
-                      fontSize: 30,
+                    decoration: TextDecoration.none,
+                    fontSize: 30,
                     fontFamily: 'Acme',
                     color: Colors.grey[800],
                   ),
@@ -314,12 +316,18 @@ class _ShowMainInfoState extends State<ShowMainInfo>
                 height: 10
             ),
             Container(
-              alignment: Alignment.center,
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              child: Align(
-                  alignment: Alignment.center,
-                  child: _createCommentsView()),
+                alignment: Alignment.center,
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                child: Stack(
+                  children: <Widget>[
+                    Align(
+                        alignment: Alignment.center,
+                        child: _createCommentsView()
+                    ),
+                    MakeCommentWidget()
+                  ],
+                )
             )
           ]),
         ),
