@@ -28,7 +28,6 @@ class _CheckUserExistsState extends State<CheckUserExists> {
 
   @override
   void initState() {
-    //_auth.signOut();
     getPermissions();
     super.initState();
   }
@@ -47,7 +46,6 @@ class _CheckUserExistsState extends State<CheckUserExists> {
           return WelcomeScreen(userExists: snapshot.data, authInstance: _auth);
         }
         return Container(
-          color: Colors.white,
         );
       },
     );

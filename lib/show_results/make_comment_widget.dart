@@ -1,16 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:labl_app/models/comment.dart';
+
 
 class MakeCommentWidget extends StatefulWidget {
+  final DocumentReference userData;
+  final String countryCode;
+  final DocumentReference document;
+  final List<Comment> comments;
+
+  const MakeCommentWidget(this.userData, this.countryCode, this.document, this.comments);
   @override
-  _MakeCommentWidgetState createState() => _MakeCommentWidgetState();
+  _MakeCommentWidgetState createState() => _MakeCommentWidgetState(userData, countryCode, document, comments);
 }
 
 class _MakeCommentWidgetState extends State<MakeCommentWidget> {
   final _commentKey = GlobalKey<FormState>();
   final _commentController = TextEditingController();
+  DocumentReference userData;
+  String username;
+  String countryCode;
+  DocumentReference document;
+  List<dynamic> comments;
+
+  _MakeCommentWidgetState(DocumentReference _userData, String _countryCode,
+      DocumentReference _document,List<Comment> _comments){
+    this.userData = _userData;
+    this.countryCode = _countryCode;
+    this.document = _document;
+    this.comments = List<dynamic>();
+    _comments.forEach((comment) {
+      this.comments.add({
+        "Comment": comment.comment,
+        "Made by": comment.username,
+        "Made in": comment.madeIn
+      });
+    });
+  }
+
+  Future<void> getUsername(){
+    userData.get().then((user){
+      setState(() {
+        username = user['Name'];
+      });
+    });
+  }
 
   @override
   void initState() {
+    getUsername();
     super.initState();
   }
 
@@ -63,7 +101,20 @@ class _MakeCommentWidgetState extends State<MakeCommentWidget> {
                 ),
                 GestureDetector(
                   onTap: (){
+                    var _comment = {
+                      "Comment": _commentController.text,
+                      "Made by": username,
+                      "Made in": countryCode
+                    };
+                    print('Comment is made by ${username}');
+                    comments.add(_comment);
+                    print(comments.length);
+                    print(comments.first);
+                    document.updateData({"Comments": comments});
                     print('send tapped');
+                    setState(() {
+
+                    });
                   },
                   child: CircleAvatar(
                     backgroundColor: Colors.amber,

@@ -15,23 +15,11 @@ class Comment with PropertyChangeNotifier<String> {
       notifyListeners('profile image arrived');
     });
   }
-  String _emoji(String country) {
-    int flagOffset = 0x1F1E6;
-    int asciiOffset = 0x41;
-
-
-    int firstChar = country.codeUnitAt(0) - asciiOffset + flagOffset;
-    int secondChar = country.codeUnitAt(1) - asciiOffset + flagOffset;
-
-    String emoji =
-        String.fromCharCode(firstChar) + String.fromCharCode(secondChar);
-    return emoji;
-  }
-  Comment(this.profileImage,this.username,this.comment);
+  Comment({this.profileImage,this.username,this.comment, this.madeIn});
   Comment.fromMap(Map<dynamic, dynamic> data){
     username = data['Made by'];
     comment = data['Comment'];
-    madeIn = _emoji(data['Made in']);
+    madeIn = data['Made in'];
     loadImageFromStorage(username);
   }
 }

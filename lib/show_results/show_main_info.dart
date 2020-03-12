@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'make_comment_widget.dart';
+import 'package:alpha2_countries/alpha2_countries.dart';
 
 class ShowMainInfo extends StatefulWidget {
   final finalResponse;
@@ -32,24 +33,10 @@ class _ShowMainInfoState extends State<ShowMainInfo>
   DocumentReference _document;
   DocumentReference _userData;
   List<Comment> comments = [
-    Comment('', "User1",
-        "Nice Beer Bros"),
-    Comment('', "User2",
-        "I didn't like it"),
-    Comment('', "User3",
-        "Where can I buy it cheaper?"),
-    Comment('', "User1",
-        "Nice Beer Bros"),
-    Comment('', "User2",
-        "I didn't like it"),
-    Comment('', "User3",
-        "Where can I buy it cheaper?"),
-    Comment('', "User1",
-        "Nice Beer Bros"),
   ];
   Animation<double> animation;
   AnimationController controller;
-
+  Widget _makeCommentWidget = Container();
 
   Future<void> getComments() async {
     await _document.get().then((value) {
@@ -59,8 +46,15 @@ class _ShowMainInfoState extends State<ShowMainInfo>
         comments = List<Comment>.from(value['Comments'].map(
             (d) => Comment.fromMap(d)
         ));
+        print('Comment array of length ${comments.length} as passed');
+        _makeCommentWidget = MakeCommentWidget(_userData, getISOCodeFromName(country), _document,
+            comments);
       });
     });
+  }
+
+  String getISOCodeFromName(String _countryName){
+    return Countries().resolveCode(_countryName);
   }
 
   Future<void> getDollarToEuroRate() async{
@@ -107,7 +101,6 @@ class _ShowMainInfoState extends State<ShowMainInfo>
       ..addListener(() {
         setState(() {});
       });
-    checkCurrencyExchange();
     super.initState();
   }
 
@@ -117,6 +110,7 @@ class _ShowMainInfoState extends State<ShowMainInfo>
       _firestoreService=Provider.of<FireStoreService>(context);
       _document = _firestoreService.Beers.document(beerLabel);
       getComments();
+      checkCurrencyExchange();
     });
     super.didChangeDependencies();
   }
@@ -176,7 +170,20 @@ class _ShowMainInfoState extends State<ShowMainInfo>
   }
 
 
+
   _createCommentsView() {
+    String _emoji(String country) {
+      int flagOffset = 0x1F1E6;
+      int asciiOffset = 0x41;
+
+
+      int firstChar = country.codeUnitAt(0) - asciiOffset + flagOffset;
+      int secondChar = country.codeUnitAt(1) - asciiOffset + flagOffset;
+
+      String emoji =
+          String.fromCharCode(firstChar) + String.fromCharCode(secondChar);
+      return emoji;
+    }
     return ListView.builder(
       itemCount: comments.length,
       itemBuilder: (BuildContext context, int index) {
@@ -234,7 +241,7 @@ class _ShowMainInfoState extends State<ShowMainInfo>
                               )
                             ),
                             TextSpan(
-                              text: "${comments[index].madeIn}",
+                              text: _emoji(comments[index].madeIn),
                               style: TextStyle(
                                   color: Colors.grey[800],
                                   fontSize: 30,
@@ -325,7 +332,7 @@ class _ShowMainInfoState extends State<ShowMainInfo>
                         alignment: Alignment.center,
                         child: _createCommentsView()
                     ),
-                    MakeCommentWidget()
+                    _makeCommentWidget
                   ],
                 )
             )

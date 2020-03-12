@@ -137,10 +137,13 @@ class _BeerDescriptionState extends State<BeerDescription>
                                 }
                                 else
                                   return Scaffold(
-                                    body: Stack(children: <Widget>[
-                                      ShowImageWidget(label: label, image: image),
-                                      ShowMainInfo(snapshot.data, country),
-                                    ]),
+                                    body: SingleChildScrollView(
+                                      child: Stack(children: <Widget>[
+                                        ShowImageWidget(label: label, image: image),
+                                        ShowMainInfo(snapshot.data, country),
+                                      ]
+                                      ),
+                                    )
                                   );
                               },
 
