@@ -2,21 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:labl_app/models/comment.dart';
 
-
 class MakeCommentWidget extends StatefulWidget {
   final DocumentReference userData;
   final String countryCode;
   final DocumentReference document;
   final List<Comment> comments;
+  final Function parentSetState;
 
-  const MakeCommentWidget(this.userData, this.countryCode, this.document, this.comments);
+  const MakeCommentWidget(this.userData, this.countryCode, this.document, this.comments, this.parentSetState);
   @override
-  _MakeCommentWidgetState createState() => _MakeCommentWidgetState(userData, countryCode, document, comments);
+  _MakeCommentWidgetState createState() => _MakeCommentWidgetState(userData, countryCode, document, comments, parentSetState);
 }
 
 class _MakeCommentWidgetState extends State<MakeCommentWidget> {
   final _commentKey = GlobalKey<FormState>();
   final _commentController = TextEditingController();
+  Function parentSetState;
   DocumentReference userData;
   String username;
   String countryCode;
@@ -24,11 +25,12 @@ class _MakeCommentWidgetState extends State<MakeCommentWidget> {
   List<dynamic> comments;
 
   _MakeCommentWidgetState(DocumentReference _userData, String _countryCode,
-      DocumentReference _document,List<Comment> _comments){
+      DocumentReference _document,List<Comment> _comments, Function _parentSetState){
     this.userData = _userData;
     this.countryCode = _countryCode;
     this.document = _document;
     this.comments = List<dynamic>();
+    this.parentSetState = _parentSetState;
     _comments.forEach((comment) {
       this.comments.add({
         "Comment": comment.comment,
@@ -112,9 +114,7 @@ class _MakeCommentWidgetState extends State<MakeCommentWidget> {
                     print(comments.first);
                     document.updateData({"Comments": comments});
                     print('send tapped');
-                    setState(() {
-
-                    });
+                    widget.parentSetState();
                   },
                   child: CircleAvatar(
                     backgroundColor: Colors.amber,

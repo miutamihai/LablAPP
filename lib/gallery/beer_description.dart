@@ -60,7 +60,7 @@ class _BeerDescriptionState extends State<BeerDescription>
     request.headers.addAll(headers);
     request.fields.addEntries([
       MapEntry('label', label),
-      MapEntry('country', country),
+      MapEntry('country', 'Ireland'),
     ]);
     var response = await request.send();
     var finalResult = await response.stream.bytesToString();
@@ -140,7 +140,7 @@ class _BeerDescriptionState extends State<BeerDescription>
                                     body: SingleChildScrollView(
                                       child: Stack(children: <Widget>[
                                         ShowImageWidget(label: label, image: image),
-                                        ShowMainInfo(snapshot.data, country),
+                                        ShowMainInfo(snapshot.data, 'Ireland'),
                                       ]
                                       ),
                                     )
