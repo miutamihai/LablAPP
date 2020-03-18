@@ -49,7 +49,7 @@ class _ShowResultState extends State<ShowResult>{
         filename: 'sent-file.png');
     request.fields.addEntries([
       MapEntry('password', 'L@blAPI1268.!'),
-      MapEntry('country', country),
+      MapEntry('country', 'Ireland'),
     ]);
     request.files.add(imageToBeSent);
     var response = await request.send();
@@ -85,11 +85,11 @@ class _ShowResultState extends State<ShowResult>{
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Loader();
         } else
-          return  SingleChildScrollView(
-            child: Scaffold(
-              body: Stack(children: <Widget>[
+          return Scaffold (
+            body:SingleChildScrollView (
+              child: Stack(children: <Widget>[
                 showImage(MediaQuery.of(context)),
-                ShowMainInfo(snapshot.data, country),
+                ShowMainInfo(snapshot.data, 'Ireland'),
                 Positioned(
                   top: 40,
                   left: 40,
