@@ -1,4 +1,4 @@
-# labl_app
+# The LABL App
 
 A new Flutter application.
 
