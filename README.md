@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # labl_app
 
 A new Flutter application.
@@ -6,8 +5,6 @@ A new Flutter application.
 ## Getting Started
 
 This project is a starting point for a Flutter application.
-=======
-# "Compare that price" - college third-year project.
 ---
 ## Authors:
 - **Adam Ochotnicki**
@@ -35,11 +32,7 @@ This project is a starting point for a Flutter application.
 
 3. Currently, application testing will focus on the Android version.
 
-4. [Link to our Trello Board](https://trello.com/b/UdiiXOaY/member-assignments)
-
----
 ## Getting Started with flutter:
->>>>>>> bf82252628b2d9cc3a5247d7ca9b165d2404eef6
 
 A few resources to get you started if this is your first Flutter project:
 
